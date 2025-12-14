@@ -106,8 +106,8 @@ php artisan serve
 ```
 
 6. Default accounts from seeder:
-- Admin: `admin@fotokopi.test` / `password`
-- User: `user@fotokopi.test` / `password`
+- Admin: `admin@fotokopi.com` / `password`
+- User: `user@fotokopi.com` / `password`
 
 If you need me to run migrations, seed data, or start the server here, tell saya dan saya akan melanjutkan.
 
