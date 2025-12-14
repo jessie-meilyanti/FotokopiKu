@@ -1,0 +1,49 @@
+/* Reset & base */
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;padding:16px;background:#f6f7fb;color:#111}
+
+/* layout */
+.container{max-width:1100px;margin:0 auto;padding:16px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+
+/* nav */
+nav a{margin-right:12px;color:#333;text-decoration:none;padding:8px 12px;border-radius:8px;transition:background .18s,transform .12s}
+nav a:hover{background:rgba(0,0,0,0.05);transform:translateY(-2px)}
+
+/* cards & inputs */
+.card{background:#fff;border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(20,20,50,0.06);margin-bottom:12px;transition:transform .18s,box-shadow .18s;overflow:hidden}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(20,20,50,0.08)}
+input,textarea,button,select{font:inherit}
+input,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;transition:box-shadow .12s,transform .12s}
+input:focus,textarea:focus{outline:none;box-shadow:0 6px 18px rgba(25,118,210,0.12);transform:translateY(-2px)}
+button{background:#2463eb;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;transition:transform .14s,box-shadow .14s,opacity .14s}
+button:active{transform:scale(.98)}
+button.primary:active{transform:scale(.97) translateY(1px)}
+
+/* hover scale */
+.btn-hover:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 10px 30px rgba(34,60,80,0.08)}
+
+/* fade-in reveal (used on content update) */
+.fade-in{opacity:0;transform:translateY(8px);transition:opacity .36s ease,transform .36s ease}
+.fade-in.show{opacity:1;transform:translateY(0)}
+
+/* utility classes used by blade button component */
+.transition-smooth{transition:all .18s cubic-bezier(.2,.9,.2,1)}
+.hover-lift:hover{transform:translateY(-3px)}
+.active-press:active{transform:scale(.98)}
+.focus-ring:focus{outline:none;box-shadow:0 6px 18px rgba(79,70,229,0.12)}
+
+/* status badges */
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;color:#fff;font-weight:600;font-size:13px}
+.status-processing{background:#f0ad4e} /* kuning */
+.status-completed{background:#28a745} /* hijau */
+.status-cancelled{background:#dc3545} /* merah */
+.status-pending{background:#6c757d}
+
+/* orders list */
+.orders-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+/* small screens */
+@media (max-width:640px){
+  .header{flex-direction:column;align-items:flex-start;gap:12px}
+}

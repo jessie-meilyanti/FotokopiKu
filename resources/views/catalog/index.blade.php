@@ -7,7 +7,7 @@
                     Fotokopi, jasa print, laminating, jilid, dan alat tulis untuk kantor & sekolah.
                 </h1>
                 <p class="text-gray-600 dark:text-gray-300">
-                    Pesan online, ambil di toko atau kirim. Semua siap cepat dengan harga bersahabat.
+                    Pesan online, tanpa antri di tempat. Semua siap cepat dengan harga bersahabat.
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <x-button href="#produk" color="indigo">Belanja sekarang</x-button>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="relative">
-                <img src="https://via.placeholder.com/1200x500?text=Print+Cepat+%26+Murah" alt="Hero" class="rounded-2xl shadow-lg w-full object-cover">
+                <img src="/images/Toko.jpg" alt="Hero" class="rounded-2xl shadow-lg w-full h-64 md:h-96 object-cover">
                 <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/10 to-transparent rounded-2xl"></div>
             </div>
         </div>

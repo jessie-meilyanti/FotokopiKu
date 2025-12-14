@@ -84,5 +84,14 @@ class OrderController extends Controller
 
         return $pdf->download("invoice-{$order->id}.pdf");
     }
+
+    public function feed()
+    {
+        $orders = Order::with('items.product', 'user')->latest()->limit(50)->get();
+
+        $html = view('admin.orders._list', compact('orders'))->render();
+
+        return response()->json(['html' => $html]);
+    }
 }
 

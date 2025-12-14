@@ -11,6 +11,14 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Favicons - use larger sizes for better visibility -->
+            <!-- Favicons (multiple sizes for better display) -->
+            <link rel="icon" href="/images/Logo.png" type="image/png" sizes="32x32">
+            <link rel="icon" href="/images/Logo.png" type="image/png" sizes="64x64">
+            <link rel="icon" href="/images/Logo.png" type="image/png" sizes="192x192">
+            <link rel="apple-touch-icon" href="/images/Logo.png">
+            <meta name="theme-color" content="#ffffff">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

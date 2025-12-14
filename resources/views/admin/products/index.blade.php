@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Produk</h1>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Produk & Jasa</h1>
             <x-button href="{{ route('admin.products.create') }}" color="indigo">Tambah</x-button>
         </div>
 

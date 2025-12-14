@@ -4,9 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex items-center space-x-8">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <x-application-logo class="block h-9 w-auto fill-current text-indigo-600" />
-                        <span class="font-bold text-lg text-gray-800 dark:text-gray-100">FotokopiKu</span>
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        <img src="/images/Logo.png" alt="FotokopiKu" class="h-16 md:h-20 w-auto me-4 align-middle">
+                        <span class="font-bold text-lg text-indigo-600 dark:text-gray-100">FotokopiKu</span>
                     </a>
                 </div>
 
@@ -15,17 +15,24 @@
                         Katalog
                     </x-nav-link>
                     @auth
-                        <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                            Keranjang
-                        </x-nav-link>
-                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                            Pesanan
-                        </x-nav-link>
-                        @can('is_admin')
-                            <x-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
-                                Admin
+                            @if(auth()->user()->is_admin)
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                Dashboard
                             </x-nav-link>
-                        @endcan
+                            <x-nav-link :href="route('admin.orders.index')" :active="str_starts_with(request()->path(), 'admin')">
+                                Pesanan Users
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
+                                Produk & Jasa
+                            </x-nav-link>
+                        @else
+                            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                                Keranjang
+                            </x-nav-link>
+                            <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                                Pesanan Saya
+                            </x-nav-link>
+                        @endif
                     @endauth
                 </div>
             </div>
@@ -87,17 +94,21 @@
                 Katalog
             </x-responsive-nav-link>
             @auth
-                <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                    Keranjang
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                    Pesanan
-                </x-responsive-nav-link>
-                @can('is_admin')
-                    <x-responsive-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
-                        Admin
+                @if(auth()->user()->is_admin)
+                    <x-responsive-nav-link :href="route('admin.orders.index')" :active="str_starts_with(request()->path(), 'admin')">
+                        Pesanan Users
                     </x-responsive-nav-link>
-                @endcan
+                    <x-responsive-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
+                        Produk & Jasa
+                    </x-responsive-nav-link>
+                @else
+                    <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                        Keranjang
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                        Pesanan Saya
+                    </x-responsive-nav-link>
+                @endif
             @endauth
         </div>
 

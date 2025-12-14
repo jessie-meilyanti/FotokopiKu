@@ -14,14 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@fotokopi.test',
+            'email' => 'admin@fotokopi.com',
             'password' => 'password',
             'is_admin' => true,
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'Pelanggan',
-            'email' => 'user@fotokopi.test',
+            'email' => 'user@fotokopi.com',
             'password' => 'password',
         ]);
 

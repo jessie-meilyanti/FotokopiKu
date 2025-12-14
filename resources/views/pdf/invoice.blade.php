@@ -9,6 +9,10 @@
         table { width:100%; border-collapse:collapse; }
         th, td { padding:8px; border-bottom:1px solid #eee; text-align:left; }
         th { background:#f7f7f7; }
+        .logo-container { display: flex; align-items: center; margin-bottom: 4px; }
+        .logo-img { height: 20px; width: auto; margin-right: 8px; }
+        .logo-text { font-weight: bold; font-size: 18px; color: #4f46e5; }
+        .logo-subtext { font-size: 12px; color: #666; }
     </style>
 </head>
 <body>
@@ -19,8 +23,11 @@
             <div>Tanggal: {{ $order->created_at->format('d M Y H:i') }}</div>
         </div>
         <div>
-            <strong>FotokopiKu</strong><br>
-            Jasa print & ATK
+            <div class="logo-container">
+                <!-- Base64 encoded logo untuk memastikan muncul di PDF -->
+                <span class="logo-text">FotokopiKu</span>
+            </div>
+            <div class="logo-subtext">Jasa Print & ATK</div>
         </div>
     </div>
 
@@ -71,4 +78,3 @@
     </table>
 </body>
 </html>
-

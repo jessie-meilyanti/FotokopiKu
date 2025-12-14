@@ -47,6 +47,7 @@ Route::middleware(['auth', 'can:is_admin'])->prefix('admin')->name('admin.')->gr
     Route::resource('categories', AdminCategoryController::class)->except('show');
     Route::resource('products', AdminProductController::class)->except('show');
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/feed', [AdminOrderController::class, 'feed'])->name('orders.feed');
     Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
     Route::post('orders/{order}/track', [AdminOrderController::class, 'addTrack'])->name('orders.track');
     Route::get('orders/{order}/invoice', [AdminOrderController::class, 'invoice'])->name('orders.invoice');

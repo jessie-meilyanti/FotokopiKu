@@ -29,9 +29,20 @@ class PasswordResetLinkController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+        // If the email belongs to a user, create a password reset token and
+        // redirect immediately to the reset form (convenience for admin/local use).
+        // This still uses the password broker token so the reset process is normal.
+        $user = \App\Models\User::where('email', $request->email)->first();
+
+        // Only allow immediate redirect to reset form in non-production (local) environments.
+        if ($user && app()->environment('local')) {
+            $token = Password::broker()->createToken($user);
+            // redirect to the reset form with token and email in querystring
+            $url = route('password.reset', $token) . '?email=' . urlencode($request->email);
+            return redirect()->to($url);
+        }
+
+        // Fallback: behave like default and attempt to send reset link (keeps compatibility)
         $status = Password::sendResetLink(
             $request->only('email')
         );

@@ -13,12 +13,20 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Favicons (same as main layout) -->
+         <!-- Favicon dengan ukuran yang lebih besar dan resolusi tinggi -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/Logo.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="/images/Logo.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/Logo.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/Logo.png">
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <img src="/images/Bawah.png" alt="Logo" class="w-28 h-auto">
                 </a>
             </div>
 
