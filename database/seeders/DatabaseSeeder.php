@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(CatalogSeeder::class);
+        $this->call(StaffSeeder::class);
         $this->call(\Database\Seeders\OrderSeeder::class);
+        $this->call(\Database\Seeders\CartSeeder::class);
+
+        // Samakan password semua akun untuk kemudahan login (admin, staff, user)
+        \App\Models\User::query()->update(['password' => bcrypt('password')]);
     }
 }

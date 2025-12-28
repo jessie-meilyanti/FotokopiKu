@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utilities for smooth interactions */
+.transition-smooth {
+	transition: all 160ms ease-in-out;
+}
+.hover-lift:hover {
+	transform: translateY(-4px);
+}
+.active-press:active {
+	transform: scale(0.98);
+}
+.focus-ring:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px rgba(79,70,229,0.08);
+}

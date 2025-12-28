@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CartController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::patch('/cart/qty/{item}', [CartController::class, 'updateQuantity'])->name('cart.qty');
     Route::post('/cart/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
 
     Route::get('/checkout', [CheckoutController::class, 'form'])->name('checkout.form');
@@ -42,11 +44,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{order}/reorder', [OrderController::class, 'reorder'])->name('orders.reorder');
 });
 
-Route::middleware(['auth', 'can:is_admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminOrderController::class, 'dashboard'])->name('dashboard');
+Route::middleware(['auth', 'can:is_staff'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', AdminCategoryController::class)->except('show');
     Route::resource('products', AdminProductController::class)->except('show');
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::get('staff', [\App\Http\Controllers\Admin\StaffController::class, 'index'])->name('staff.index');
+    Route::get('staff/create', [\App\Http\Controllers\Admin\StaffController::class, 'create'])->name('staff.create');
+    Route::post('staff', [\App\Http\Controllers\Admin\StaffController::class, 'store'])->name('staff.store');
+    Route::get('staff/{id}/edit', [\App\Http\Controllers\Admin\StaffController::class, 'edit'])->name('staff.edit');
+    Route::put('staff/{id}', [\App\Http\Controllers\Admin\StaffController::class, 'update'])->name('staff.update');
     Route::get('orders/feed', [AdminOrderController::class, 'feed'])->name('orders.feed');
     Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
     Route::post('orders/{order}/track', [AdminOrderController::class, 'addTrack'])->name('orders.track');

@@ -2,7 +2,7 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100/70 dark:border-gray-700 overflow-hidden">
             <div class="grid md:grid-cols-2 gap-6">
-                <img src="{{ $product->thumbnail ?? 'https://via.placeholder.com/800x600?text=Produk' }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                <img src="{{ $product->thumbnail ?: '/images/product-placeholder.svg' }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                 <div class="p-6 space-y-4">
                     <div class="text-sm text-gray-500 uppercase">{{ $product->category?->name }}</div>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $product->name }}</h1>

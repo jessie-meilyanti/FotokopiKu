@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->string('recipient_name')->nullable()->after('user_id');
             $table->string('recipient_phone')->nullable()->after('recipient_name');
-            $table->text('shipping_address')->nullable()->after('recipient_phone');
+            $table->string('recipient_whatsapp')->nullable()->after('recipient_phone');
+            $table->text('shipping_address')->nullable()->after('recipient_whatsapp');
+            $table->string('shipping_city')->nullable()->after('shipping_address');
             $table->string('payment_bank')->nullable()->after('payment_method');
             $table->string('payment_reference')->nullable()->after('payment_status');
             $table->string('payment_proof_path')->nullable()->after('payment_reference');
@@ -24,7 +26,9 @@ return new class extends Migration
             $table->dropColumn([
                 'recipient_name',
                 'recipient_phone',
+                'recipient_whatsapp',
                 'shipping_address',
+                'shipping_city',
                 'payment_bank',
                 'payment_reference',
                 'payment_proof_path',

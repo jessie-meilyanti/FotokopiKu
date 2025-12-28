@@ -27,10 +27,26 @@
                 </div>
             </div>
             <div>
-                <label class="text-sm text-gray-600">URL Thumbnail</label>
-                <input type="url" name="thumbnail" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900" value="{{ old('thumbnail', $product->thumbnail) }}">
-                <div class="text-xs text-gray-500 mt-1">atau unggah gambar baru:</div>
-                <input type="file" name="thumbnail_file" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                <label class="text-sm text-gray-600 dark:text-gray-300">📸 Gambar Produk</label>
+                @if($product->thumbnail)
+                    <div class="mb-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div class="flex items-center gap-3 mb-2">
+                            <img src="{{ $product->thumbnail }}" alt="{{ $product->name }}" class="h-20 w-20 object-cover rounded-lg border-2 border-indigo-200 dark:border-indigo-700">
+                            <div class="flex-1">
+                                <div class="text-sm font-medium text-gray-700 dark:text-gray-200">Foto saat ini</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400">Foto akan tetap ada kecuali dihapus atau diganti</div>
+                            </div>
+                        </div>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="remove_thumbnail" value="1" class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                            <span class="text-sm text-red-600 dark:text-red-400">🗑️ Hapus foto (gunakan placeholder)</span>
+                        </label>
+                    </div>
+                @endif
+                <input type="file" name="thumbnail_file" accept="image/*" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-900/30 dark:file:text-indigo-300">
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    <span class="font-medium">Unggah gambar baru:</span> JPG, PNG, WebP (Max 2MB). Foto lama akan otomatis tergantikan.
+                </div>
             </div>
             <div>
                 <label class="text-sm text-gray-600">Deskripsi</label>

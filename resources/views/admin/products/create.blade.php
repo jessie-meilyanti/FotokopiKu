@@ -27,10 +27,9 @@
                 </div>
             </div>
             <div>
-                <label class="text-sm text-gray-600">URL Thumbnail</label>
-                <input type="url" name="thumbnail" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900" placeholder="https://via.placeholder.com/600x400?text=Produk">
-                <div class="text-xs text-gray-500 mt-1">atau unggah gambar:</div>
-                <input type="file" name="thumbnail_file" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                <label class="text-sm text-gray-600">📸 Gambar Produk</label>
+                <input type="file" name="thumbnail_file" accept="image/*" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                <div class="text-xs text-gray-500 mt-1">Unggah gambar (JPG, PNG, WebP)</div>
             </div>
             <div>
                 <label class="text-sm text-gray-600">Deskripsi</label>

@@ -33,30 +33,64 @@ class CheckoutController extends Controller
         }
 
         $data = $request->validate([
-            'address' => 'required|string|min:10',
+            'address' => 'required_if:delivery_method,kirim-antar|nullable|string|min:10',
             'recipient' => 'required|string',
-            'phone' => 'required|string',
-            'payment_method' => 'required|string',
-            'payment_bank' => 'nullable|string|max:150',
+            'whatsapp' => 'required|string',
+            'delivery_method' => 'required|string|in:ambil-di-tempat,kirim-antar',
+            'city' => 'required_if:delivery_method,kirim-antar|nullable|string',
+            'payment_method' => 'required|string|in:COD,QRIS',
+            'payment_proof' => 'required_if:payment_method,QRIS|nullable|image|max:2048',
         ]);
 
         $subtotal = $cart->items->sum(fn ($i) => $i->qty * $i->product->price);
+        $totalQty = $cart->items->sum(fn($i) => $i->qty);
         $shipping = 0;
+
+        // Jika kirim-antar, cek minimal 10 item
+        if ($data['delivery_method'] === 'kirim-antar') {
+            if ($totalQty < 10) {
+                return back()->withInput()->with('error', 'Kirim-antar minimal 10 item. Total Anda: ' . $totalQty);
+            }
+
+            // Hitung ongkir berdasarkan kota
+            $city = strtolower($data['city'] ?? '');
+            if (str_contains($city, 'jakarta')) {
+                $shipping = 15000;
+            } elseif (str_contains($city, 'bogor')) {
+                $shipping = 20000;
+            } elseif (str_contains($city, 'depok')) {
+                $shipping = 18000;
+            } elseif (str_contains($city, 'tangerang')) {
+                $shipping = 22000;
+            } elseif (str_contains($city, 'bekasi')) {
+                $shipping = 12000; // toko di bekasi, lebih murah
+            } else {
+                $shipping = 25000; // luar jabodetabek
+            }
+        }
 
         $order = Order::create([
             'user_id' => auth()->id(),
             'recipient_name' => $data['recipient'],
-            'recipient_phone' => $data['phone'],
+            'recipient_phone' => null,
+            'recipient_whatsapp' => $data['whatsapp'],
             'shipping_address' => $data['address'],
+            'shipping_city' => $data['city'] ?? null,
             'status' => 'processing',
             'subtotal' => $subtotal,
             'shipping' => $shipping,
             'total' => $subtotal + $shipping,
             'payment_method' => $data['payment_method'],
             'payment_status' => 'unpaid',
-            'payment_bank' => $data['payment_bank'] ?? null,
+            'payment_bank' => null,
             'tracking_code' => 'TRK-' . Str::upper(Str::random(8)),
         ]);
+
+        // Upload bukti bayar jika ada
+        if ($request->hasFile('payment_proof')) {
+            $path = $request->file('payment_proof')->store('payment_proofs', 'public');
+            $order->update(['payment_proof_path' => $path]);
+        }
 
         foreach ($cart->items as $ci) {
             $order->items()->create([
@@ -69,23 +103,29 @@ class CheckoutController extends Controller
 
         $cart->items()->delete();
 
-        Address::firstOrCreate(
-            ['user_id' => auth()->id(), 'label' => 'Utama'],
-            [
-                'recipient' => $data['recipient'],
-                'phone' => $data['phone'],
-                'full_address' => $data['address'],
-            ]
-        );
+        if ($data['delivery_method'] === 'kirim-antar') {
+            Address::firstOrCreate(
+                ['user_id' => auth()->id(), 'label' => 'Utama'],
+                [
+                    'recipient' => $data['recipient'],
+                    'phone' => $data['whatsapp'],
+                    'full_address' => $data['address'],
+                ]
+            );
+        }
 
         OrderTrack::create([
             'order_id' => $order->id,
             'status' => 'Order dibuat',
-            'location' => 'Toko',
-            'note' => 'Menunggu proses',
+            'location' => $data['delivery_method'] === 'ambil-di-tempat' ? 'Toko - Ruko Summarecon Bekasi' : 'Persiapan pengiriman',
+            'note' => $data['delivery_method'] === 'ambil-di-tempat' ? 'Silakan ambil di toko kami' : 'Pesanan akan dikirim',
         ]);
 
-        return redirect()->route('orders.show', $order)->with('success', 'Order dibuat, lanjutkan pembayaran COD di toko.');
+        $message = $data['delivery_method'] === 'ambil-di-tempat' 
+            ? 'Order dibuat! Silakan bayar & ambil di Ruko Summarecon Bekasi.' 
+            : 'Order dibuat! Kami akan kirim pesanan Anda.';
+
+        return redirect()->route('orders.index')->with('success', $message);
     }
 }
 

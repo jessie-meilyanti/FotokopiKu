@@ -5,7 +5,9 @@
         <div class="p-4 space-y-3 hover:bg-gray-50 dark:hover:bg-gray-900/60 transition" data-order-id="{{ $order->id }}">
             <div class="flex justify-between items-start">
                 <div>
-                    <div class="font-semibold text-gray-900 dark:text-white">#{{ $order->id }} • {{ $order->user->name }}</div>
+                    <a href="{{ route('admin.orders.show', $order) }}" class="font-semibold text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                        #{{ $order->id }} • {{ $order->recipient_name ?? $order->user?->name ?? 'Guest' }}
+                    </a>
                     <div class="text-sm text-gray-500">{{ $order->tracking_code }}</div>
                 </div>
                 <div class="text-right">
@@ -17,12 +19,21 @@
                 <span>Status:</span>
                 <span class="font-medium {{ $order->status_badge_class }} px-2 py-1 rounded-full">{{ $order->status_label }}</span>
                 <span class="text-gray-400">•</span>
-                <span>Bayar: <span class="font-medium">{{ ucfirst($order->payment_status) }}</span></span>
+                <span>Bayar: <span class="font-medium">{{ ucfirst($order->payment_status) }}</span> ({{ $order->payment_method }})</span>
+                <span class="text-gray-400">•</span>
+                <a href="{{ route('admin.orders.show', $order) }}" class="text-indigo-600 hover:underline">📋 Lihat Detail</a>
                 <span class="text-gray-400">•</span>
                 <a href="{{ route('admin.orders.invoice', $order) }}" class="text-indigo-600 hover:underline">Invoice PDF</a>
-                <span class="text-gray-400">•</span>
-                <span class="text-sm text-gray-500">{{ $order->tracking_code ?? '-' }}</span>
             </div>
+
+            @if($order->payment_proof_path)
+                <div class="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                    <div class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">💳 Bukti Pembayaran QRIS:</div>
+                    <a href="{{ asset('storage/' . $order->payment_proof_path) }}" target="_blank" class="block">
+                        <img src="{{ asset('storage/' . $order->payment_proof_path) }}" alt="Bukti Pembayaran" class="max-w-xs h-auto rounded-lg border border-gray-200 dark:border-gray-700 hover:opacity-90 transition">
+                    </a>
+                </div>
+            @endif
 
             <form action="{{ route('admin.orders.status', $order) }}" method="POST" class="grid sm:grid-cols-4 gap-2">
                 @csrf @method('PATCH')

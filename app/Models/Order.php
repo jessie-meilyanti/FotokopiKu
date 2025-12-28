@@ -14,6 +14,7 @@ class Order extends Model
         'recipient_name',
         'recipient_phone',
         'shipping_address',
+        'shipping_city',
         'status',
         'subtotal',
         'shipping',

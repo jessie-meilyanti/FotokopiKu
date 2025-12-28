@@ -22,5 +22,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('is_admin', fn ($user) => (bool) $user->is_admin);
+        
+        Gate::define('is_staff', function ($user) {
+            return $user->is_admin || \App\Models\Staff::where('user_id', $user->id)->exists();
+        });
     }
 }

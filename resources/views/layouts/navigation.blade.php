@@ -12,27 +12,30 @@
 
                 <div class="hidden space-x-6 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home') || request()->routeIs('produk.show')">
-                        Katalog
+                        🛍️ Katalog
                     </x-nav-link>
                     @auth
-                            @if(auth()->user()->is_admin)
+                        @can('is_staff')
                             <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                                Dashboard
+                                📊 Dasbor
                             </x-nav-link>
-                            <x-nav-link :href="route('admin.orders.index')" :active="str_starts_with(request()->path(), 'admin')">
-                                Pesanan Users
+                            <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                                📑 Pesanan Pengguna
                             </x-nav-link>
-                            <x-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
-                                Produk & Jasa
+                            <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*') || request()->routeIs('admin.categories.*')">
+                                🧾 Produk & Jasa
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.staff.index')" :active="request()->routeIs('admin.staff.*')">
+                                👥 Staf
                             </x-nav-link>
                         @else
                             <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                                Keranjang
+                                🛒 Keranjang
                             </x-nav-link>
                             <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                                Pesanan Saya
+                                📦 Pesanan Saya
                             </x-nav-link>
-                        @endif
+                        @endcan
                     @endauth
                 </div>
             </div>
@@ -91,24 +94,30 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home') || request()->routeIs('produk.show')">
-                Katalog
+                🛍️ Katalog
             </x-responsive-nav-link>
             @auth
-                @if(auth()->user()->is_admin)
-                    <x-responsive-nav-link :href="route('admin.orders.index')" :active="str_starts_with(request()->path(), 'admin')">
-                        Pesanan Users
+                @can('is_staff')
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        📊 Dasbor
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('admin.products.index')" :active="str_starts_with(request()->path(), 'admin')">
-                        Produk & Jasa
+                    <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                        📑 Pesanan Pengguna
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*') || request()->routeIs('admin.categories.*')">
+                        🧾 Produk & Jasa
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.staff.index')" :active="request()->routeIs('admin.staff.*')">
+                        👥 Staf
                     </x-responsive-nav-link>
                 @else
                     <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
-                        Keranjang
+                        🛒 Keranjang
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                        Pesanan Saya
+                        📦 Pesanan Saya
                     </x-responsive-nav-link>
-                @endif
+                @endcan
             @endauth
         </div>
 

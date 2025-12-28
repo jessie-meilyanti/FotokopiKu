@@ -2,21 +2,24 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div class="grid lg:grid-cols-2 gap-6 items-center">
             <div class="space-y-4">
-                <span class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-semibold">Print & ATK Terjangkau</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-semibold">Print & ATK Harga Terjangkau</span>
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
                     Fotokopi, jasa print, laminating, jilid, dan alat tulis untuk kantor & sekolah.
                 </h1>
                 <p class="text-gray-600 dark:text-gray-300">
-                    Pesan online, tanpa antri di tempat. Semua siap cepat dengan harga bersahabat.
+                    🚀 Pesan online, tanpa antri di tempat. Semua siap cepat dengan harga terjangkau se-Jabodetabek. 
+                    <strong>📍 Lokasi: Ruko Summarecon, Bekasi.</strong>
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <x-button href="#produk" color="indigo">Belanja sekarang</x-button>
                     <x-button href="#jasa" color="gray">Lihat jasa cetak</x-button>
                 </div>
             </div>
-            <div class="relative">
-                <img src="/images/Toko.jpg" alt="Hero" class="rounded-2xl shadow-lg w-full h-64 md:h-96 object-cover">
-                <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/10 to-transparent rounded-2xl"></div>
+            <div class="relative rounded-2xl overflow-hidden shadow-lg">
+                <div class="aspect-[16/9] md:aspect-[5/3]">
+                    <img src="/images/Toko.jpg" alt="Hero" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/10 to-transparent"></div>
             </div>
         </div>
 
@@ -60,21 +63,31 @@
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($products as $product)
-                    <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100/60 dark:border-gray-700 shadow-sm flex flex-col">
-                        <img src="{{ $product->thumbnail ?? 'https://via.placeholder.com/600x400?text=Produk' }}" alt="{{ $product->name }}" class="h-44 w-full object-cover rounded-t-xl">
-                        <div class="p-4 flex-1 flex flex-col">
-                            <div class="text-xs uppercase text-gray-500">{{ $product->category?->name }}</div>
-                            <a href="{{ route('produk.show', $product->slug) }}" class="font-semibold text-gray-900 dark:text-white mt-1 line-clamp-2">{{ $product->name }}</a>
-                            <p class="text-sm text-gray-500 dark:text-gray-300 line-clamp-2 mt-1">{{ $product->description }}</p>
-                            <div class="mt-auto flex items-center justify-between pt-3">
-                                <div class="font-bold text-indigo-700 dark:text-indigo-300">
+                    <div class="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-100/80 dark:border-gray-700 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="{{ $product->thumbnail ?: '/images/product-placeholder.svg' }}" alt="{{ $product->name }}" loading="lazy" class="w-full h-full object-cover transition duration-300 group-hover:scale-[1.03]">
+                            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 dark:bg-gray-900/90 text-xs font-semibold text-gray-800 dark:text-gray-100 shadow">
+                                {{ $product->category?->name ?? 'Produk & Jasa' }}
+                            </div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col gap-2">
+                            <a href="{{ route('produk.show', $product->slug) }}" class="font-semibold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">
+                                {{ $product->name }}
+                            </a>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 line-clamp-2">{{ $product->description }}</p>
+                            <div class="mt-auto flex items-center justify-between pt-2">
+                                <div class="text-lg font-bold text-indigo-700 dark:text-indigo-300" aria-label="Harga">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </div>
                                 @auth
-                                    <form action="{{ route('cart.add', $product) }}" method="POST">
-                                        @csrf
-                                        <x-button type="submit" color="indigo">Tambah</x-button>
-                                    </form>
+                                    @if(auth()->user()->is_admin || auth()->user()->staff)
+                                        <x-button href="{{ route('admin.products.edit', $product) }}" color="indigo">Edit</x-button>
+                                    @else
+                                        <form action="{{ route('cart.add', $product) }}" method="POST">
+                                            @csrf
+                                            <x-button type="submit" color="indigo">Tambah</x-button>
+                                        </form>
+                                    @endif
                                 @else
                                     <x-button href="{{ route('login') }}" color="indigo">Masuk untuk beli</x-button>
                                 @endauth

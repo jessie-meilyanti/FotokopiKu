@@ -30,11 +30,15 @@ class ProfileController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('photo')) {
-            if ($request->user()->photo_path) {
+            // Delete old photo only if it exists in storage
+            if ($request->user()->photo_path && str_starts_with($request->user()->photo_path, '/storage/')) {
                 Storage::disk('public')->delete(str_replace('/storage/', '', $request->user()->photo_path));
             }
             $path = $request->file('photo')->store('profiles', 'public');
             $data['photo_path'] = Storage::url($path);
+        } else {
+            // Don't update photo_path if no file uploaded
+            unset($data['photo_path']);
         }
 
         $request->user()->fill($data);

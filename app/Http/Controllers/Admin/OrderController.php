@@ -12,11 +12,17 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('items.product', 'user')->latest()->paginate(15);
+        $status = $request->get('status');
 
-        return view('admin.orders.index', compact('orders'));
+        $orders = Order::with('items.product', 'user')
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->latest()
+            ->paginate(15)
+            ->appends(['status' => $status]);
+
+        return view('admin.orders.index', compact('orders', 'status'));
     }
 
     public function dashboard()
@@ -85,13 +91,24 @@ class OrderController extends Controller
         return $pdf->download("invoice-{$order->id}.pdf");
     }
 
-    public function feed()
+    public function feed(Request $request)
     {
-        $orders = Order::with('items.product', 'user')->latest()->limit(50)->get();
+        $status = $request->get('status');
+        $orders = Order::with('items.product', 'user', 'tracks')
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->latest()
+            ->limit(50)
+            ->get();
 
         $html = view('admin.orders._list', compact('orders'))->render();
 
         return response()->json(['html' => $html]);
+    }
+
+    public function show(Order $order)
+    {
+        $order->load('items.product', 'user', 'tracks');
+        return view('admin.orders.show', compact('order'));
     }
 }
 

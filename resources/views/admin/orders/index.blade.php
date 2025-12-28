@@ -1,6 +1,17 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Pesanan Users</h1>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Pesanan Pengguna</h1>
+            <form method="GET" action="{{ route('admin.orders.index') }}" class="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-sm">
+                <label for="status" class="text-sm text-gray-600 dark:text-gray-300">Filter status:</label>
+                <select id="status" name="status" class="text-sm rounded-md border-gray-200 dark:border-gray-700 dark:bg-gray-900" onchange="this.form.submit()">
+                    @php $statuses = ['' => 'Semua','pending' => 'Menunggu','processing' => 'Sedang diproses','completed' => 'Selesai','cancelled' => 'Dibatalkan']; @endphp
+                    @foreach($statuses as $val => $label)
+                        <option value="{{ $val }}" @selected(($status ?? '') === $val)> {{ $label }} </option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
 
         <div id="ordersContainer" class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
             @include('admin.orders._list', ['orders' => $orders])
@@ -12,7 +23,7 @@
     <script>
         (function(){
             // polling admin orders feed to update list in near-real-time
-            const feedUrl = "{{ route('admin.orders.feed') }}";
+            const feedUrl = "{{ route('admin.orders.feed', ['status' => $status ?? null]) }}";
             const container = document.getElementById('ordersContainer');
             let lastFetch = 0;
 

@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
 }

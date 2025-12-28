@@ -32,6 +32,56 @@ class CartController extends Controller
         return back()->with('success', 'Produk ditambahkan ke keranjang');
     }
 
+    public function updateQuantity(Request $request, CartItem $item)
+    {
+        abort_unless($item->cart->user_id === auth()->id(), 403);
+
+        $data = $request->validate([
+            'action' => 'required|in:increment,decrement,set',
+            'value' => 'sometimes|integer|min:1|max:999',
+        ]);
+        $cartId = $item->cart_id;
+
+        if ($data['action'] === 'increment') {
+            $item->increment('qty');
+        } elseif ($data['action'] === 'decrement') {
+            if ($item->qty <= 1) {
+                $item->delete();
+            } else {
+                $item->decrement('qty');
+            }
+        } elseif ($data['action'] === 'set') {
+            $newQty = $data['value'] ?? 1;
+            if ($newQty < 1) {
+                $item->delete();
+            } else {
+                $item->update(['qty' => $newQty]);
+            }
+        }
+
+        $cart = Cart::with('items.product')->find($cartId);
+        $subtotal = 0;
+        $totalQty = 0;
+        if ($cart) {
+            foreach ($cart->items as $ci) {
+                $subtotal += ($ci->qty * $ci->product->price);
+                $totalQty += $ci->qty;
+            }
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'qty' => $item->exists ? $item->qty : 0,
+                'removed' => !$item->exists || ($item->exists && $item->qty === 0),
+                'subtotal' => $subtotal,
+                'totalQty' => $totalQty,
+                'status' => 'ok',
+            ]);
+        }
+
+        return back()->with('success', $data['action'] === 'increment' ? 'Jumlah produk diperbarui' : ($item->exists ? 'Jumlah produk diperbarui' : 'Item dihapus'));
+    }
+
     public function remove(CartItem $item)
     {
         abort_unless($item->cart->user_id === auth()->id(), 403);

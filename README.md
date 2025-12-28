@@ -1,126 +1,256 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📋 FotokopiKu - Panduan Setup Lengkap
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Website fotokopi online yang aesthetic dan user-friendly banget!** ✨
 
-## About Laravel
+Halo bestie! 👋 Welcome to FotokopiKu - platform fotokopi digital yang bikin hidup mahasiswa jadi lebih mudah. Gaskan setup projectnya dengan mengikuti step-by-step guide ini ya!
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Apa Itu FotokopiKu?
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+FotokopiKu adalah website e-commerce modern untuk layanan fotokopi yang dibangun dengan tech stack kekinian:
+- **Laravel 8.1** - Backend framework yang powerful buat handle semua logic bisnis
+- **Tailwind CSS** - Styling yang aesthetic dan responsive tanpa ribet
+- **Alpine.js** - Interaktivitas JavaScript yang ringan dan smooth
+- **Vite** - Build tool super cepat buat compile asset
+- **MySQL** - Database yang reliable buat nyimpen semua data
 
-## Learning Laravel
+### ✨ Fitur Unggulan
+- 🛒 Shopping cart dengan real-time quantity control
+- 💳 Pembayaran COD & QRIS dengan upload bukti transfer
+- 📦 Tracking pesanan real-time
+- 👥 Role management (User, Staff, Admin, Owner, Courier)
+- 🚚 Pengiriman dengan calculate ongkir Jabodetabek
+- 📊 Dashboard admin untuk manage orders & staff
+- 📱 Fully responsive design
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Persiapan Sebelum Mulai
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Sebelum lanjut, pastikan laptop/PC kamu udah ada software-software ini ya:
 
-## Laravel Sponsors
+### 1️⃣ **Laragon Full** (Windows) atau XAMPP/MAMP
+📥 **Download:** [laragon.org/download](https://laragon.org/download/)
+- **Versi:** Laragon Full 6.0 atau yang lebih baru
+- **Kenapa?** Laragon udah include semua yang kita butuhin: PHP, MySQL, Apache, dan terminal yang mudah dipakai
+- **Include:** PHP 8.1+, MySQL 5.7+, Apache, Composer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Alternatif untuk Mac/Linux:**
+- XAMPP: [apachefriends.org](https://www.apachefriends.org/)
+- MAMP: [mamp.info](https://www.mamp.info/)
 
-### Premium Partners
+### 2️⃣ **PHP** (Jika belum ada di Laragon)
+📌 **Versi minimum:** PHP 8.0 atau lebih tinggi
+- **Kenapa PHP 8.0+?** Laravel 8.1 butuh minimal PHP 7.3, tapi PHP 8+ lebih stabil dan punya fitur modern
+- **Cek versi:** Buka terminal, ketik `php -v`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Extensions PHP yang dibutuhkan** (biasanya udah include di Laragon):
+- OpenSSL
+- PDO
+- Mbstring
+- Tokenizer
+- XML
+- Ctype
+- JSON
+- BCMath
 
-## Contributing
+### 3️⃣ **Composer**
+📥 **Download:** [getcomposer.org](https://getcomposer.org/)
+- **Versi:** Composer 2.0+
+- **Kenapa?** Composer adalah package manager buat PHP, basically npm-nya PHP world
+- **Cek versi:** Ketik `composer -v` di terminal
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4️⃣ **Node.js & npm**
+📥 **Download:** [nodejs.org](https://nodejs.org/)
+- **Versi:** Node.js 16+ (LTS recommended)
+- **Kenapa?** Buat compile asset frontend (CSS & JS) pakai Vite
+- **Cek versi:** Ketik `node -v` dan `npm -v` di terminal
 
-## Code of Conduct
+### 5️⃣ **Git** (Optional tapi recommended)
+📥 **Download:** [git-scm.com](https://git-scm.com/)
+- **Kenapa?** Buat version control dan clone project kalo dari repository
+- **Cek versi:** Ketik `git --version`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 📦 Step 1: Download & Extract Project
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Cara 1: Download ZIP
+1. Download file `fotokopi1.zip` (pastiin udah dapet dari dosen/source)
+2. Extract ke folder `laragon/www/` atau `htdocs/` (kalo pake XAMPP)
+   ```
+   C:\laragon\www\fotokopi1
+   ```
+# 📦 FotokopiKu — Panduan Lengkap (Bahasa Indonesia)
 
-## License
+Website layanan fotokopi modern berbasis Laravel. Dokumen ini menjelaskan cara men-setup di komputer lain, versi software yang dibutuhkan, serta cara menjaga agar data tidak hilang.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Ringkasan Versi Proyek
 
-## Running this project (FotokopiKu)
+- Framework: Laravel 10.x (`laravel/framework` ^10.10)
+- PHP: 8.1+
+- Composer: 2.x
+- Database: MySQL 5.7+ atau MariaDB 10.3+
+- Frontend Build: Vite ^5.0.0
+- Tailwind CSS: ^3.4.19
+- Alpine.js: ^3.x
+- Axios: ^1.6.4
+- PDF: `barryvdh/laravel-dompdf` ^3.1
 
-Quick steps to run locally using Laragon / PHP + MySQL:
+Rekomendasi Windows: Laragon Full 6.x (sudah termasuk PHP, MySQL, Composer). Alternatif: XAMPP.
 
-1. Copy `.env.example` to `.env` and set DB configuration. Example values:
+## Persyaratan Sistem
 
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=fotokopi_db
-DB_USERNAME=root
-DB_PASSWORD=
-```
+- PHP 8.1 atau lebih baru
+- Composer 2.x
+- Node.js 18.x LTS atau lebih baru (untuk Vite 5)
+- MySQL 5.7+ atau MariaDB 10.3+
+- Git (opsional)
 
-2. Install PHP dependencies:
+## Instalasi di Komputer Baru
 
-```bash
-composer install
-```
+1. Ekstrak folder `fotokopi1` ke `C:\laragon\www\fotokopi1` (atau htdocs jika XAMPP).
+2. Buka terminal di folder proyek, jalankan:
+   - `composer install`
+   - `npm install`
+3. Buat file `.env` dari template dan generate app key:
+   - Salin: `copy .env.example .env`
+   - `php artisan key:generate`
+4. Edit `.env` dan sesuaikan konfigurasi database:
+   ```env
+   APP_NAME=FotokopiKu
+   APP_ENV=local
+   APP_DEBUG=true
+   APP_URL=http://localhost
 
-3. Install frontend deps and build assets (requires Node.js):
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=fotokopi_db
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+5. Buat database baru `fotokopi_db` via phpMyAdmin atau CLI.
+6. Migrasi tabel dan (opsional) isi data dummy:
+   - `php artisan migrate`
+   - `php artisan db:seed` (opsional, hanya untuk development)
+7. Buat symlink storage agar gambar bisa diakses:
+   - `php artisan storage:link`
+8. Jalankan server dan builder aset:
+   - Terminal 1: `php artisan serve`
+   - Terminal 2: `npm run dev`
 
-```bash
-npm install
-npm run build
-```
+## Akun Default (Jika Seeding)
 
-4. Run migrations and seed sample data:
-
-```bash
-php artisan migrate --seed
-```
-
-5. Start the local server (or use Laragon):
-
-```bash
-php artisan serve
-```
-
-6. Default accounts from seeder:
 - Admin: `admin@fotokopi.com` / `password`
 - User: `user@fotokopi.com` / `password`
+- Semua akun contoh menggunakan password: `password`
 
-If you need me to run migrations, seed data, or start the server here, tell saya dan saya akan melanjutkan.
+## Menjaga Data Agar Tidak Hilang
 
-## Changelog (ringkasan perubahan saya)
+Data yang perlu dijaga:
+- Database (tabel users, products, orders, dll.)
+- File upload di `storage/app/public` (bukti transfer, dll.)
+- Gambar produk di `public/images`
 
-- UI: Tambah komponen Blade `x-button` untuk konsistensi tombol dan animasi.
-- Order: Tambah helper status (`status_label`, `status_badge_class`) di `app/Models/Order.php`.
-- Orders: Tambah aksi `cancel` dan `reorder`, serta tampilan badge berwarna di `resources/views/orders`.
-- Admin: Dashboard penjualan 12 bulan (`resources/views/admin/dashboard.blade.php`) dengan Chart.js.
-- Seeder: `OrderSeeder` untuk data sample orders + track.
-- Assets: `public/images/logo.svg` dan placeholders.
+Hal yang harus dihindari pada lingkungan yang menyimpan data asli:
+- Jangan menggunakan `php artisan migrate:fresh` atau `db:wipe` (ini menghapus semua tabel)
+- Gunakan `php artisan migrate` biasa untuk upgrade skema database
+- Jalankan seeder hanya di development. Seeder tidak menghapus data, namun menambah data dummy.
 
-## Developer notes
+### Backup Otomatis (Windows PowerShell)
 
-- Tailwind build: jalankan `npm install` lalu `npm run dev` atau `npm run build` setelah mengubah `resources/css`.
-- Untuk membersihkan cache setelah perubahan view/config: `php artisan optimize:clear`.
+Kami menyertakan script backup siap pakai: `scripts/backup.ps1`.
+
+Apa yang dilakukan script:
+- Mengekspor database ke file SQL (`backups/db-YYYYMMDD-HHMMSS.sql`)
+- Mengarsipkan folder penting ke ZIP (`backups/files-YYYYMMDD-HHMMSS.zip`), termasuk `public/images` dan `storage/app/public`
+
+Cara menjalankan:
+
+```powershell
+# Dari folder proyek
+.\n+.\n+.
+PS> .\scripts\backup.ps1
+```
+
+Catatan:
+- Script mencoba mendeteksi `mysqldump` dari PATH atau Laragon (`C:\laragon\bin\mysql\...\bin\mysqldump.exe`).
+- Pastikan `.env` berisi `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+
+### Restore Singkat
+
+1. Import file SQL ke MySQL:
+   ```bash
+   mysql -h HOST -P PORT -u USER -p < backups/db-YYYYMMDD-HHMMSS.sql
+   ```
+2. Extract ZIP ke folder proyek, pastikan struktur `public/images` dan `storage/app/public` kembali.
+3. Jalankan `php artisan storage:link` bila perlu.
+
+## Kompilasi Aset
+
+- Development: `npm run dev` (hot reload)
+- Production: `npm run build` (minified, siap deploy)
+
+## Troubleshooting Cepat
+
+- CSS/JS tidak tampil: jalankan `npm run dev` atau `npm run build`, lalu `php artisan view:clear`
+- Gambar upload tidak muncul: `php artisan storage:link`
+- Error kunci aplikasi: `php artisan key:generate`
+- Masalah koneksi DB: cek kredensial di `.env` dan status MySQL
+
+## Catatan Versi & Ketergantungan
+
+Mengacu pada `composer.json` dan `package.json`:
+- `laravel/framework` ^10.10 (Laravel 10)
+- `barryvdh/laravel-dompdf` ^3.1
+- `laravel/sanctum` ^3.3
+- `phpunit/phpunit` ^10.1
+- `vite` ^5.0.0
+- `tailwindcss` ^3.4.19
+- `alpinejs` ^3.4.2
+- `axios` ^1.6.4
+
+Pastikan Node.js 18+ agar kompatibel dengan Vite 5.
+
+## Rekomendasi Workflow Aman (Agar Data Tetap Tersusun)
+
+- Selalu backup sebelum update dependency atau menjalankan migrasi besar
+- Hindari perintah destruktif di lingkungan berdata asli (`migrate:fresh`, `db:wipe`)
+- Simpan gambar produk di `public/images` dan file upload di `storage/app/public`
+- Gunakan seeder untuk development saja
+- Dokumentasikan perubahan skema/migrasi di tim
+
+## Kontak & Dukungan
+
+- Dokumentasi Laravel 10: https://laravel.com/docs/10.x
+- Tailwind CSS: https://tailwindcss.com/docs
+- Vite: https://vitejs.dev/guide/
+
+Selamat menggunakan FotokopiKu! Dengan backup rutin dan konfigurasi `.env` yang benar, data Anda akan aman dan tetap rapi seperti sekarang. 🙌
+Website FotokopiKu dirancang berdasarkan observasi langsung di toko fotokopi nyata untuk mengatasi masalah berikut:
+
+**Problem Customer:**
+1. **Antrian Panjang** – Saat ramai, customer harus menunggu lama hanya untuk pesan print/fotokopi.
+2. **Tidak Tahu Harga Pasti** – Harga sering tidak jelas, terutama untuk jasa laminating/jilid.
+3. **Pengiriman Manual** – Customer harus datang ambil sendiri atau nego ongkir tidak standar.
+
+**Problem Owner:**
+1. **Order Manual** – Catat pesanan di buku/kertas, rawan salah atau hilang.
+2. **Stok Tidak Terpantau** – Stok ATK sering kosong mendadak karena tidak tercatat real-time.
+3. **Pembayaran Ribet** – Sering customer lupa bayar atau tidak bawa uang pas.
+
+**Solusi FotokopiKu:**
+- ✅ **Order Online** – Customer pesan kapan saja, tanpa antri. Owner bisa siapkan pesanan sebelum customer datang.
+- ✅ **Harga Transparan** – Semua produk/jasa tampil harga jelas di website.
+- ✅ **Ongkir Otomatis** – Sistem hitung ongkir berdasarkan kota, standar dan adil.
+- ✅ **Payment Fleksibel** – COD untuk yang mau bayar di tempat, QRIS untuk transfer langsung.
+- ✅ **Tracking Pesanan** – Customer tahu status pesanan real-time (processing, shipped, delivered).
+- ✅ **Admin Panel** – Owner kelola stok, pesanan, dan penjualan dengan mudah. Validasi bukti bayar QRIS otomatis.
+
+**Catatan:** Minimal 10 item untuk kirim-antar agar ongkir sebanding dengan biaya operasional. Owner bisa adjust logic ini di `CheckoutController.php` jika perlu.
+
+---
+
+**Terima kasih telah menggunakan FotokopiKu! Semoga panduan ini membantu. Selamat menjalankan website! 🎉**
