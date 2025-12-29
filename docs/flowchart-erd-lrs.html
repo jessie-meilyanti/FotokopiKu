@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart, ERD & LRS - Fotokopiku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap');
+        * { font-family: 'Figtree', sans-serif; }
+        body { background: linear-gradient(135deg, #EEF2FF, #FFFFFF, #F3F4F6); }
+        
+        /* Flowchart Elements */
+        .oval { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 12px 32px; border-radius: 50px; font-weight: 600; font-size: 13px; white-space: nowrap; box-shadow: 0 4px 12px rgba(79,70,229,0.3); }
+        .rect { background: white; border: 2px solid #6366F1; color: #1F2937; padding: 12px 20px; border-radius: 6px; font-weight: 500; font-size: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); min-width: 160px; }
+        .diamond { background: #FEF3C7; border: 2px solid #F59E0B; color: #92400E; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); font-weight: 600; font-size: 11px; text-align: center; }
+        .parallelogram { background: #ECFDF5; border: 2px solid #10B981; color: #065F46; padding: 10px 16px; transform: skewX(-12deg); font-weight: 500; font-size: 11px; text-align: center; }
+        .parallelogram span { transform: skewX(12deg); display: block; }
+        .display { background: #F3E8FF; border: 2px solid #9333EA; color: #6B21A8; padding: 10px 16px; border-radius: 4px 16px 16px 4px; font-weight: 500; font-size: 12px; text-align: center; }
+        .manual { background: #FFF7ED; border: 2px solid #F97316; color: #C2410C; padding: 10px 16px; clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%); font-weight: 500; font-size: 11px; text-align: center; }
+        
+        .arrow { width: 2px; height: 24px; background: #6366F1; margin: 0 auto; position: relative; }
+        .arrow::after { content: ''; position: absolute; bottom: -5px; left: -5px; border: 5px solid transparent; border-top: 7px solid #6366F1; }
+        
+        .flowchart-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        .branch { display: flex; gap: 20px; justify-content: center; }
+        .branch-item { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border: 1px dashed #D1D5DB; border-radius: 8px; }
+        .label { font-size: 10px; font-weight: 700; color: #4F46E5; background: #E0E7FF; padding: 2px 8px; border-radius: 3px; }
+        
+        .erd-table { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #E5E7EB; }
+        .erd-header { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 8px 12px; font-weight: 600; text-align: center; font-size: 12px; }
+        .erd-row { padding: 6px 10px; border-bottom: 1px solid #F3F4F6; display: flex; justify-content: space-between; font-size: 11px; }
+        .erd-row:last-child { border: none; }
+        .pk { color: #DC2626; font-weight: 600; }
+        .fk { color: #2563EB; font-weight: 500; }
+        .type { color: #9CA3AF; font-size: 9px; }
+        
+        .tab-btn { padding: 10px 20px; font-weight: 600; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s; }
+        .tab-btn.active { background: white; color: #4F46E5; box-shadow: 0 -2px 8px rgba(0,0,0,0.05); }
+        .tab-btn:not(.active) { background: #C7D2FE; color: #4338CA; }
+        
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        .lrs-item { background: white; border-left: 4px solid #6366F1; padding: 12px; border-radius: 4px; margin-bottom: 10px; font-size: 13px; }
+        .lrs-item strong { color: #4F46E5; }
+    </style>
+</head>
+<body class="p-4 lg:p-8">
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto mb-6">
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xl font-bold">📊</div>
+                <div>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Fotokopiku</h1>
+                    <p class="text-sm text-gray-500">Dokumentasi Flowchart, ERD & LRS</p>
+                </div>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Laravel 10</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">PHP 8.2</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">MySQL</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto mb-2 flex flex-wrap gap-1 bg-gradient-to-r from-indigo-100 to-purple-100 p-2 rounded-t-lg">
+        <button onclick="switchTab('flowchart-user')" class="tab-btn active">👤 Flowchart User</button>
+        <button onclick="switchTab('flowchart-admin')" class="tab-btn">🔧 Flowchart Admin</button>
+        <button onclick="switchTab('erd')" class="tab-btn">🗃️ ERD Database</button>
+        <button onclick="switchTab('lrs')" class="tab-btn">📋 LRS</button>
+    </div>
+
+    <!-- ============ FLOWCHART USER ============ -->
+    <section id="flowchart-user" class="section active max-w-6xl mx-auto mb-8">
+        <div class="bg-white rounded-b-lg lg:rounded-lg shadow-lg p-6 overflow-x-auto">
+            <h2 class="text-lg font-bold text-gray-900 mb-6">👤 Alur Proses User / Pelanggan</h2>
+            
+            <div class="flex flex-col items-center gap-4 pb-8" style="min-width: 480px;">
+                <div class="oval">🚀 MULAI</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Buka Website Fotokopiku</div>
+                <div class="arrow"></div>
+                
+                <div class="display">📱 Tampilkan Halaman Beranda</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Lihat Katalog Produk & Jasa<br><span class="text-gray-500 text-xs">(Print, Fotokopi, Laminating, Jilid, ATK)</span></div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Filter?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="parallelogram"><span>Pilih Kategori</span></div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Pilih Produk / Jasa</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Login?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display">📝 Form Login/Daftar</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="manual">Input Akun</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Klik Tombol "Tambah ke Keranjang"</div>
+                <div class="arrow"></div>
+                
+                <div class="display">🛒 Halaman Keranjang</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Ubah Qty?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="parallelogram"><span>Update Qty/Hapus</span></div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Klik "Checkout"</div>
+                <div class="arrow"></div>
+                
+                <div class="display">📋 Form Checkout</div>
+                <div class="arrow"></div>
+                
+                <div class="manual">Input Nama, No. WA, Alamat</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Metode Kirim?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Ambil Tempat</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 110px; font-size: 10px;">Gratis Ongkir</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Kirim Antar</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="parallelogram"><span style="font-size: 10px;">Pilih Kota</span></div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 110px; font-size: 10px;">Hitung Ongkir</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Metode Bayar?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">COD</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px; font-size: 10px;">Lanjut</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">QRIS</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 10px;">📱 QR Code</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="manual" style="font-size: 10px;">Upload Bukti</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Klik "Buat Pesanan"</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Sistem Buat Pesanan<br><span class="text-gray-500 text-xs">(Status: Menunggu)</span></div>
+                <div class="arrow"></div>
+                
+                <div class="display">✅ Konfirmasi Pesanan</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Lihat Daftar Pesanan Saya</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Lacak?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 11px;">📍 Tampilkan Status Tracking</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 80px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Invoice?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px; font-size: 10px;">📄 Download PDF</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 80px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Tunggu Pesanan Diproses</div>
+                <div class="arrow"></div>
+                
+                <div class="display">📦 Status: Diproses → Selesai</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Ambil / Terima Pesanan</div>
+                <div class="arrow"></div>
+                
+                <div class="oval">✨ SELESAI</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FLOWCHART ADMIN ============ -->
+    <section id="flowchart-admin" class="section max-w-6xl mx-auto mb-8">
+        <div class="bg-white rounded-b-lg lg:rounded-lg shadow-lg p-6 overflow-x-auto">
+            <h2 class="text-lg font-bold text-gray-900 mb-6">🔧 Alur Proses Admin / Staff</h2>
+            
+            <div class="flex flex-col items-center gap-4 pb-8" style="min-width: 480px;">
+                <div class="oval">🚀 MULAI</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Buka Website Fotokopiku</div>
+                <div class="arrow"></div>
+                
+                <div class="display">📝 Halaman Login Admin</div>
+                <div class="arrow"></div>
+                
+                <div class="manual">Input Email & Password</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Valid?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 11px;">❌ Error Login</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 80px;">Lanjut</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="display">📊 Dashboard Admin</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Lihat Statistik & Grafik Penjualan</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Menu?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label text-xs">Pesanan</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 10px;">📦 Daftar Pesanan</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="parallelogram"><span style="font-size: 10px;">Filter Status</span></div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="diamond" style="width: 70px; height: 70px; font-size: 9px;">Aksi?</div>
+                        <div style="font-size: 9px; margin-top: 6px;">
+                            <span class="label text-xs">Update Status</span><br>
+                            <span class="label text-xs">Tambah Track</span><br>
+                            <span class="label text-xs">Cetak Invoice</span>
+                        </div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label text-xs">Produk</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 10px;">🏷️ Daftar Produk</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="diamond" style="width: 70px; height: 70px; font-size: 9px;">Aksi?</div>
+                        <div style="font-size: 9px; margin-top: 6px;">
+                            <span class="label text-xs">Tambah</span><br>
+                            <span class="label text-xs">Edit</span><br>
+                            <span class="label text-xs">Hapus</span>
+                        </div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label text-xs">Kategori</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 10px;">📁 Daftar Kategori</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="diamond" style="width: 70px; height: 70px; font-size: 9px;">Aksi?</div>
+                        <div style="font-size: 9px; margin-top: 6px;">
+                            <span class="label text-xs">Tambah</span><br>
+                            <span class="label text-xs">Edit</span><br>
+                            <span class="label text-xs">Hapus</span>
+                        </div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label text-xs">Staff</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="display" style="font-size: 10px;">👥 Daftar Staff</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="diamond" style="width: 70px; height: 70px; font-size: 9px;">Aksi?</div>
+                        <div style="font-size: 9px; margin-top: 6px;">
+                            <span class="label text-xs">Tambah</span><br>
+                            <span class="label text-xs">Edit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Proses Aksi Sesuai Pilihan</div>
+                <div class="arrow"></div>
+                
+                <div class="rect">Simpan Perubahan ke Database</div>
+                <div class="arrow"></div>
+                
+                <div class="diamond">Logout?</div>
+                <div class="branch">
+                    <div class="branch-item">
+                        <span class="label">Tidak</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 100px; font-size: 10px;">Kembali Dashboard</div>
+                    </div>
+                    <div class="branch-item">
+                        <span class="label">Ya</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="rect" style="min-width: 80px;">Logout</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                
+                <div class="oval">✨ SELESAI</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ERD ============ -->
+    <section id="erd" class="section max-w-6xl mx-auto mb-8">
+        <div class="bg-white rounded-b-lg lg:rounded-lg shadow-lg p-6">
+            <h2 class="text-lg font-bold text-gray-900 mb-6">🗃️ Entity Relationship Diagram (ERD)</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Users -->
+                <div class="erd-table">
+                    <div class="erd-header">👤 users</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span>name</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>email</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>phone</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>password</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>is_admin</span><span class="type">BOOLEAN</span></div>
+                    <div class="erd-row"><span>photo_path</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>timestamps</span><span class="type">TIMESTAMP</span></div>
+                </div>
+
+                <!-- Orders -->
+                <div class="erd-table">
+                    <div class="erd-header">📦 orders</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 user_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>recipient_name</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>recipient_phone</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>shipping_address</span><span class="type">TEXT</span></div>
+                    <div class="erd-row"><span>shipping_city</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>status</span><span class="type">ENUM</span></div>
+                    <div class="erd-row"><span>total</span><span class="type">DECIMAL</span></div>
+                    <div class="erd-row"><span>payment_method</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>payment_status</span><span class="type">VARCHAR</span></div>
+                </div>
+
+                <!-- Products -->
+                <div class="erd-table">
+                    <div class="erd-header">🏷️ products</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 category_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>name</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>slug</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>description</span><span class="type">TEXT</span></div>
+                    <div class="erd-row"><span>thumbnail</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>price</span><span class="type">DECIMAL</span></div>
+                    <div class="erd-row"><span>stock</span><span class="type">INT</span></div>
+                    <div class="erd-row"><span>is_service</span><span class="type">BOOLEAN</span></div>
+                </div>
+
+                <!-- Categories -->
+                <div class="erd-table">
+                    <div class="erd-header">📁 categories</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span>name</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>slug</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>description</span><span class="type">TEXT</span></div>
+                </div>
+
+                <!-- Carts -->
+                <div class="erd-table">
+                    <div class="erd-header">🛒 carts</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 user_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>timestamps</span><span class="type">TIMESTAMP</span></div>
+                </div>
+
+                <!-- Cart Items -->
+                <div class="erd-table">
+                    <div class="erd-header">🛍️ cart_items</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 cart_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span class="fk">🔗 product_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>qty</span><span class="type">INT</span></div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="erd-table">
+                    <div class="erd-header">📋 order_items</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 order_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span class="fk">🔗 product_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>qty</span><span class="type">INT</span></div>
+                    <div class="erd-row"><span>price</span><span class="type">DECIMAL</span></div>
+                </div>
+
+                <!-- Order Tracks -->
+                <div class="erd-table">
+                    <div class="erd-header">📍 order_tracks</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 order_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>status</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>location</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>note</span><span class="type">TEXT</span></div>
+                </div>
+
+                <!-- Addresses -->
+                <div class="erd-table">
+                    <div class="erd-header">📍 addresses</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 user_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>label</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>recipient</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>full_address</span><span class="type">TEXT</span></div>
+                </div>
+
+                <!-- Staff -->
+                <div class="erd-table">
+                    <div class="erd-header">👨‍💼 staff</div>
+                    <div class="erd-row"><span class="pk">🔑 id</span><span class="type">BIGINT</span></div>
+                    <div class="erd-row"><span class="fk">🔗 user_id</span><span class="type">FK</span></div>
+                    <div class="erd-row"><span>staff_id</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>role</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>position</span><span class="type">VARCHAR</span></div>
+                    <div class="erd-row"><span>salary</span><span class="type">DECIMAL</span></div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+                <h3 class="font-bold text-gray-900 mb-3">🔗 Relasi Antar Tabel</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    <div>• <strong>users</strong> → orders (1:N)</div>
+                    <div>• <strong>users</strong> → carts (1:1)</div>
+                    <div>• <strong>users</strong> → addresses (1:N)</div>
+                    <div>• <strong>users</strong> → staff (1:1)</div>
+                    <div>• <strong>categories</strong> → products (1:N)</div>
+                    <div>• <strong>carts</strong> → cart_items (1:N)</div>
+                    <div>• <strong>orders</strong> → order_items (1:N)</div>
+                    <div>• <strong>orders</strong> → order_tracks (1:N)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ LRS ============ -->
+    <section id="lrs" class="section max-w-6xl mx-auto mb-8">
+        <div class="bg-white rounded-b-lg lg:rounded-lg shadow-lg p-6">
+            <h2 class="text-lg font-bold text-gray-900 mb-6">📋 Layanan Referensi Sistem (LRS)</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- User Features -->
+                <div>
+                    <h3 class="text-base font-bold text-indigo-600 mb-4">👤 Fitur User</h3>
+                    <div class="lrs-item">
+                        <strong>1. Registrasi & Login</strong><br>
+                        <span class="text-gray-600">User dapat mendaftar dengan email/password dan login ke sistem untuk berbelanja</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>2. Browsing Katalog</strong><br>
+                        <span class="text-gray-600">Melihat daftar produk/jasa dengan fitur filter berdasarkan kategori</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>3. Keranjang Belanja</strong><br>
+                        <span class="text-gray-600">Menambah, mengubah jumlah, dan menghapus item dari keranjang sebelum checkout</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>4. Checkout</strong><br>
+                        <span class="text-gray-600">Input data pengiriman, pilih metode kirim (Ambil/Kirim Antar), dan metode pembayaran (COD/QRIS)</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>5. Lacak Pesanan</strong><br>
+                        <span class="text-gray-600">Melihat status pesanan real-time dengan tracking updates dari admin</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>6. Download Invoice</strong><br>
+                        <span class="text-gray-600">Mengunduh invoice dalam format PDF untuk setiap pesanan</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>7. Profil & Alamat</strong><br>
+                        <span class="text-gray-600">Mengelola data profil dan menyimpan multiple alamat pengiriman</span>
+                    </div>
+                </div>
+
+                <!-- Admin Features -->
+                <div>
+                    <h3 class="text-base font-bold text-indigo-600 mb-4">🔧 Fitur Admin</h3>
+                    <div class="lrs-item">
+                        <strong>1. Dashboard Analytics</strong><br>
+                        <span class="text-gray-600">Melihat statistik pendapatan, jumlah pesanan, dan grafik penjualan bulanan</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>2. Kelola Pesanan</strong><br>
+                        <span class="text-gray-600">View daftar pesanan, filter berdasarkan status, update status, tambah tracking, cetak invoice</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>3. Kelola Produk</strong><br>
+                        <span class="text-gray-600">CRUD produk (Tambah, Edit, Hapus) dengan upload thumbnail dan detail produk</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>4. Kelola Kategori</strong><br>
+                        <span class="text-gray-600">CRUD kategori produk untuk mengorganisir katalog</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>5. Kelola Staff</strong><br>
+                        <span class="text-gray-600">Tambah dan edit data karyawan (nama, posisi, role, gaji, foto profil)</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>6. Validasi Pembayaran QRIS</strong><br>
+                        <span class="text-gray-600">Menerima upload bukti transfer QRIS dari customer dan validasi pembayaran</span>
+                    </div>
+                    <div class="lrs-item">
+                        <strong>7. Real-time Order Feed</strong><br>
+                        <span class="text-gray-600">Polling otomatis untuk melihat pesanan baru tanpa reload halaman</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Features -->
+            <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                <h3 class="font-bold text-gray-900 mb-3">🗃️ Fitur Database</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Users & Authentication</strong><br>
+                        <span class="text-gray-600">Pengguna dapat login dan menyimpan data profil</span>
+                    </div>
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Products & Categories</strong><br>
+                        <span class="text-gray-600">Kelola katalog dengan relasi one-to-many kategori</span>
+                    </div>
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Shopping Cart</strong><br>
+                        <span class="text-gray-600">Keranjang persisten per user dengan cart items</span>
+                    </div>
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Orders & Order Items</strong><br>
+                        <span class="text-gray-600">Pesanan dengan multiple items dan status tracking</span>
+                    </div>
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Order Tracking</strong><br>
+                        <span class="text-gray-600">Riwayat status pesanan dengan lokasi dan catatan</span>
+                    </div>
+                    <div class="lrs-item" style="border-left-color: #10B981;">
+                        <strong>Staff Management</strong><br>
+                        <span class="text-gray-600">Data karyawan dengan role admin dan gaji</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Stack -->
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h3 class="font-bold text-gray-900 mb-3">⚙️ Technical Stack</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div>✅ <strong>Backend:</strong> Laravel 10 (PHP 8.2)</div>
+                    <div>✅ <strong>Database:</strong> MySQL 8.0</div>
+                    <div>✅ <strong>Frontend:</strong> Blade Templates + Tailwind CSS</div>
+                    <div>✅ <strong>Auth:</strong> Laravel Breeze + Session</div>
+                    <div>✅ <strong>Storage:</strong> Local filesystem untuk image</div>
+                    <div>✅ <strong>PDF:</strong> Laravel PDF untuk invoice</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="max-w-6xl mx-auto text-center py-6 text-gray-500 text-sm">
+        <p>📊 Dokumentasi Lengkap Fotokopiku | Semester 3 - Web Programming 2</p>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
