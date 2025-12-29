@@ -6,7 +6,7 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-6" x-data="checkoutForm()" x-init="calculateTotal()">
-            <div class="md:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-5 space-y-4">
+            <div class="md:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-4">
                 <h2 class="font-semibold text-gray-900 dark:text-white">Detail Pengiriman & Pembayaran</h2>
                 <form action="{{ route('checkout.process') }}" method="POST" enctype="multipart/form-data" class="space-y-4" @submit="validateForm">
                     @csrf
@@ -27,14 +27,14 @@
                         <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
                             🚚 Metode Pengiriman <span class="text-red-500 text-sm">*</span>
                         </label>
-                        <div class="flex gap-4 flex-wrap">
-                            <label class="flex items-center space-x-2 cursor-pointer">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="flex items-center space-x-2 cursor-pointer flex-1">
                                 <input type="radio" name="delivery_method" value="ambil-di-tempat" class="text-indigo-600" x-model="deliveryMethod" @change="onDeliveryChange" checked>
-                                <span>Ambil di Tempat (Gratis)</span>
+                                <span class="text-sm sm:text-base">Ambil di Tempat (Gratis)</span>
                             </label>
-                            <label class="flex items-center space-x-2" :class="totalQty >= 10 ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">
+                            <label class="flex items-center space-x-2 flex-1" :class="totalQty >= 10 ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">
                                 <input type="radio" name="delivery_method" value="kirim-antar" class="text-indigo-600" x-model="deliveryMethod" @change="onDeliveryChange" :disabled="totalQty < 10">
-                                <span>Kirim-Antar (min. 10 item)</span>
+                                <span class="text-sm sm:text-base">Kirim-Antar (min. 10 item)</span>
                             </label>
                         </div>
                         <p x-show="totalQty < 10" class="text-xs text-red-500 mt-1" x-text="'Tambah minimal ' + (10 - totalQty) + ' item lagi untuk kirim-antar'"></p>
@@ -68,14 +68,14 @@
                         <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
                             💳 Metode Pembayaran <span class="text-red-500 text-sm">*</span>
                         </label>
-                        <div class="flex gap-4 flex-wrap">
-                            <label class="flex items-center space-x-2 cursor-pointer">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="flex items-center space-x-2 cursor-pointer flex-1">
                                 <input type="radio" name="payment_method" value="COD" class="text-indigo-600" x-model="paymentMethod" checked>
-                                <span>Bayar Di Tempat</span>
+                                <span class="text-sm sm:text-base">Bayar Di Tempat</span>
                             </label>
-                            <label class="flex items-center space-x-2 cursor-pointer">
+                            <label class="flex items-center space-x-2 cursor-pointer flex-1">
                                 <input type="radio" name="payment_method" value="QRIS" class="text-indigo-600" x-model="paymentMethod">
-                                <span>QRIS</span>
+                                <span class="text-sm sm:text-base">QRIS</span>
                             </label>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="pt-2">
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
                             <svg x-show="isSubmitting" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -107,7 +107,7 @@
                 </form>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-5 space-y-3 h-fit sticky top-4">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-3 md:h-fit md:sticky md:top-4">
                 <h2 class="font-semibold text-gray-900 dark:text-white">Ringkasan Pesanan</h2>
                 @php
                     $subtotal = $cart->items->sum(fn($i) => $i->qty * $i->product->price);

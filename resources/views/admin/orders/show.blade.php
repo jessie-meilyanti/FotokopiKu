@@ -1,20 +1,20 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">📦 Rincian Pesanan #{{ $order->id }}</h1>
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div class="flex-1 min-w-0">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white truncate">📦 Rincian Pesanan #{{ $order->id }}</h1>
                 <div class="text-sm text-gray-500">Tracking: {{ $order->tracking_code ?? '-' }}</div>
             </div>
-            <div class="flex items-center space-x-3">
-                <a href="{{ route('admin.orders.invoice', $order) }}">
-                    <x-button color="indigo">📄 Invoice PDF</x-button>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 sm:flex-shrink-0">
+                <a href="{{ route('admin.orders.invoice', $order) }}" class="w-full sm:w-auto">
+                    <x-button color="indigo" class="w-full sm:w-auto">📄 Invoice PDF</x-button>
                 </a>
                 <a href="{{ route('admin.orders.index') }}" class="text-sm text-indigo-600">← Kembali ke Daftar</a>
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-4">
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 space-y-2">
+        <div class="grid md:grid-cols-2 gap-3 sm:gap-4">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-3 sm:p-4 space-y-2">
                 <div class="font-semibold text-gray-900 dark:text-white mb-3">Status Pesanan</div>
                 <div class="flex justify-between">
                     <span class="text-gray-600">Status</span>
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 space-y-3">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-3 sm:p-4 space-y-3">
                 <div class="font-semibold text-gray-900 dark:text-white">Pengiriman</div>
                 <div class="flex items-center justify-between text-sm">
                     <span class="text-gray-600">Metode</span>

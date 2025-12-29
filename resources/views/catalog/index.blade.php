@@ -61,9 +61,9 @@
                 </form>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 @foreach ($products as $product)
-                    <div class="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-100/80 dark:border-gray-700 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
+                    <div class="group bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl border border-gray-100/80 dark:border-gray-700 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
                         <div class="relative aspect-[4/3] overflow-hidden">
                             <img src="{{ $product->thumbnail ?: '/images/product-placeholder.svg' }}" alt="{{ $product->name }}" loading="lazy" class="w-full h-full object-cover transition duration-300 group-hover:scale-[1.03]">
                             <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 dark:bg-gray-900/90 text-xs font-semibold text-gray-800 dark:text-gray-100 shadow">

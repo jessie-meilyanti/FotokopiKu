@@ -51,5 +51,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Floating WhatsApp Button -->
+        <x-whatsapp-button />
     </body>
 </html>
