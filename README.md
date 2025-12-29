@@ -4,44 +4,26 @@
 
 ---
 
-## 📊 Dokumentasi Sistem (Flowchart, ERD, LRS)
+## 📊 Dokumentasi Sistem
 
-Dokumentasi lengkap sistem Fotokopiku tersedia dalam file HTML yang mencakup:
-- **👤 Flowchart User**: Alur proses pemesanan dari sisi pelanggan
-- **🔧 Flowchart Admin**: Alur proses manajemen dari sisi admin  
-- **🗃️ ERD**: Struktur database 10 tabel relasional (Crow's Foot Notation)
-- **📋 LRS**: Layanan Rencana Sistem lengkap
+**Lihat dokumentasi lengkap (Flowchart, ERD, LRS):**
 
-### 🌐 Cara Melihat Dokumentasi
-
-**📂 Lokasi File:** `docs/dokumentasi.html`
-
-**Metode 1: Double-Click (Paling Mudah)**
+### 🌐 Cara 1: Buka di Browser Langsung
 1. Buka folder `docs/` di project ini
-2. Double-click file `dokumentasi.html`
-3. File akan terbuka otomatis di browser
+2. Klik kanan file `dokumentasi.html`
+3. Pilih **"Open with"** → **Chrome/Firefox/Edge**
 
-**Metode 2: Via Terminal**
-```bash
-# Windows
-start docs/dokumentasi.html
-
-# macOS
-open docs/dokumentasi.html
-
-# Linux
-xdg-open docs/dokumentasi.html
-```
-
-**Metode 3: Via VS Code (dengan Live Server)**
-1. Buka file `docs/dokumentasi.html` di VS Code
-2. Klik kanan → "Open with Live Server"
-3. Atau tekan `Alt + L Alt + O`
-
-**Metode 4: Via URL (jika Laragon/server berjalan)**
+### 🔗 Cara 2: Via URL Lokal (Jika Server Running)
 ```
 http://localhost/fotokopi1/docs/dokumentasi.html
 ```
+Atau sesuaikan dengan port Laragon/XAMPP kamu.
+
+**📄 Isi Dokumentasi:**
+- ✅ Flowchart User (alur pelanggan)
+- ✅ Flowchart Admin (alur manajemen)
+- ✅ ERD Database (10 tabel + relasi)
+- ✅ LRS (Layanan Rencana Sistem)
 
 ---
 

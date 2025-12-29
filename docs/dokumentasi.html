@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumentasi Fotokopiku</title>
+    <title>Dokumentasi FotokopiKu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap');
+        @import url('https://fonts.bunny.net/css?family=figtree:400,600,700');
         * { font-family: 'Figtree', sans-serif; }
-        body { background: linear-gradient(135deg, #EEF2FF, #F9FAFB); min-height: 100vh; }
         
-        /* Flowchart ISO 5807 Symbols */
-        .fc-terminal { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 12px 32px; border-radius: 50px; font-weight: 600; font-size: 13px; box-shadow: 0 4px 12px rgba(79,70,229,0.25); display: inline-block; }
-        .fc-process { background: white; border: 2px solid #6366F1; color: #1F2937; padding: 12px 20px; border-radius: 6px; font-weight: 500; font-size: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); min-width: 160px; display: inline-block; }
-        .fc-decision { background: #FEF3C7; border: 2px solid #F59E0B; color: #92400E; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); font-weight: 600; font-size: 11px; text-align: center; line-height: 1.3; }
-        .fc-input { background: #ECFDF5; border: 2px solid #10B981; color: #065F46; padding: 10px 24px; clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); font-weight: 500; font-size: 11px; text-align: center; display: inline-flex; align-items: center; justify-content: center; min-width: 140px; }
-        .fc-display { background: #F3E8FF; border: 2px solid #9333EA; color: #6B21A8; padding: 10px 18px; border-radius: 4px 16px 16px 4px; font-weight: 500; font-size: 12px; text-align: center; display: inline-block; }
+        /* Flowchart Shapes */
+        .fc-terminal { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 12px 32px; border-radius: 50px; font-weight: 600; font-size: 13px; box-shadow: 0 4px 12px rgba(79,70,229,0.3); }
+        .fc-process { background: white; border: 2.5px solid #6366F1; color: #1F2937; padding: 12px 20px; border-radius: 6px; font-weight: 500; font-size: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); min-width: 160px; }
+        .fc-decision { background: #FEF3C7; border: 2.5px solid #F59E0B; color: #92400E; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); font-weight: 600; font-size: 11px; text-align: center; }
+        .fc-input { background: #ECFDF5; border: 2.5px solid #10B981; color: #065F46; padding: 10px 20px; clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); font-weight: 500; font-size: 11px; text-align: center; }
+        .fc-display { background: #F3E8FF; border: 2.5px solid #9333EA; color: #6B21A8; padding: 10px 18px; border-radius: 4px 16px 16px 4px; font-weight: 500; font-size: 12px; text-align: center; }
         
         .arrow { width: 2px; height: 24px; background: #6366F1; margin: 0 auto; position: relative; }
         .arrow::after { content: ''; position: absolute; bottom: -6px; left: -5px; border: 5px solid transparent; border-top: 7px solid #6366F1; }
         
-        .branch { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
-        .branch-item { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px; background: #F9FAFB; border: 2px dashed #D1D5DB; border-radius: 8px; min-width: 130px; }
-        .label { font-size: 10px; font-weight: 700; color: #4F46E5; background: #E0E7FF; padding: 2px 8px; border-radius: 3px; display: inline-block; }
-        
-        /* ERD Styles */
-        .erd-table { background: white; border: 2px solid #4F46E5; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(79,70,229,0.1); }
-        .erd-header { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 10px; font-weight: 700; font-size: 13px; text-align: center; }
-        .erd-row { padding: 8px 12px; border-bottom: 1px solid #E5E7EB; font-size: 11px; display: flex; justify-content: space-between; }
-        .erd-row:last-child { border-bottom: none; }
+        /* ERD Entity */
+        .erd-entity { background: white; border: 3px solid #4F46E5; border-radius: 8px; padding: 0; box-shadow: 0 4px 12px rgba(79,70,229,0.1); overflow: hidden; }
+        .erd-title { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 8px 12px; font-weight: 700; font-size: 11px; }
+        .erd-attr { padding: 6px 10px; border-bottom: 1px solid #E5E7EB; font-size: 11px; display: flex; justify-content: space-between; }
+        .erd-attr:last-child { border-bottom: none; }
         .erd-pk { color: #DC2626; font-weight: 700; }
         .erd-fk { color: #2563EB; font-weight: 600; }
         
-        /* LRS Styles */
-        .lrs-section { background: white; border-left: 4px solid #6366F1; padding: 16px; border-radius: 6px; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-        .lrs-title { color: #4F46E5; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
-        .lrs-content { color: #6B7280; font-size: 12px; line-height: 1.6; }
-        
-        /* Tabs */
+        /* Tab */
         .tab-btn { padding: 10px 18px; font-weight: 600; cursor: pointer; border-radius: 8px 8px 0 0; transition: all 0.2s; }
         .tab-btn.active { background: white; color: #4F46E5; border-bottom: 3px solid #4F46E5; }
         .tab-btn:not(.active) { background: #C7D2FE; color: #4338CA; }
         
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* LRS Card */
+        .lrs-box { background: linear-gradient(135deg, #EEF2FF, #F9FAFB); border-left: 4px solid #6366F1; padding: 12px; border-radius: 6px; margin: 8px 0; }
     </style>
 </head>
-<body class="p-4 lg:p-8">
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-4 lg:p-8">
+    
     <!-- Header -->
     <header class="max-w-6xl mx-auto mb-6">
         <div class="bg-white rounded-2xl shadow-lg p-6">
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl font-bold">📄</div>
+                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl font-bold">📊</div>
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Dokumentasi Fotokopiku</h1>
-                    <p class="text-gray-600 text-sm">Flowchart • ERD • LRS</p>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">FotokopiKu</h1>
+                    <p class="text-gray-600 text-sm">Dokumentasi Sistem</p>
                 </div>
             </div>
             <div class="flex gap-2 flex-wrap">
@@ -67,56 +61,41 @@
     </header>
 
     <!-- Tabs -->
-    <div class="max-w-6xl mx-auto mb-2 flex gap-1 bg-gradient-to-r from-indigo-100 to-purple-100 p-2 rounded-t-xl">
-        <button onclick="switchTab('user')" class="tab-btn active">👤 Flowchart User</button>
-        <button onclick="switchTab('admin')" class="tab-btn">🔧 Flowchart Admin</button>
+    <div class="max-w-6xl mx-auto mb-2 flex flex-wrap gap-1 bg-gradient-to-r from-indigo-100 to-purple-100 p-2 rounded-t-xl">
+        <button onclick="switchTab('user')" class="tab-btn active">👤 User</button>
+        <button onclick="switchTab('admin')" class="tab-btn">🔧 Admin</button>
         <button onclick="switchTab('erd')" class="tab-btn">🗃️ ERD</button>
         <button onclick="switchTab('lrs')" class="tab-btn">📋 LRS</button>
     </div>
 
     <!-- Content -->
     <div class="max-w-6xl mx-auto">
-        <!-- Flowchart User -->
-        <div id="user" class="tab-content active bg-white rounded-b-xl lg:rounded-xl shadow-lg p-6 overflow-x-auto">
-            <h2 class="text-xl font-bold text-gray-900 mb-1">👤 Alur Proses User</h2>
-            <p class="text-gray-600 text-sm mb-6">Proses pemesanan dari user/pelanggan</p>
-            
-            <div class="flex flex-col items-center gap-3" style="min-width: 450px;">
+        
+        <!-- USER FLOWCHART -->
+        <section id="user" class="section active bg-white rounded-b-xl lg:rounded-2xl shadow-lg p-6 overflow-x-auto">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">👤 Flowchart User</h2>
+            <div class="flex flex-col items-center gap-3 min-w-max pb-4">
                 <div class="fc-terminal">MULAI</div>
                 <div class="arrow"></div>
-                <div class="fc-process">Buka Website Fotokopiku</div>
+                <div class="fc-process">Buka Website</div>
                 <div class="arrow"></div>
-                <div class="fc-display">Tampilkan Beranda</div>
+                <div class="fc-display">Tampil Katalog</div>
                 <div class="arrow"></div>
-                <div class="fc-process">Lihat Katalog Produk</div>
-                <div class="arrow"></div>
-                <div class="fc-decision">Filter<br>Kategori?</div>
-                <div class="branch">
-                    <div class="branch-item">
-                        <span class="label">Ya</span>
-                        <div class="fc-input">Pilih Kategori</div>
+                <div class="fc-decision">Login?</div>
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded">Tidak</span>
+                        <div class="arrow" style="height: 16px;"></div>
+                        <div class="fc-input">Form Login</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">Tidak</span>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded">Ya</span>
+                        <div class="arrow" style="height: 16px;"></div>
                         <div class="fc-process" style="min-width: 80px; font-size: 11px;">Lanjut</div>
                     </div>
                 </div>
                 <div class="arrow"></div>
                 <div class="fc-process">Pilih Produk</div>
-                <div class="arrow"></div>
-                <div class="fc-decision">Sudah<br>Login?</div>
-                <div class="branch">
-                    <div class="branch-item">
-                        <span class="label">Tidak</span>
-                        <div class="fc-display" style="font-size: 11px;">Form Login</div>
-                        <div class="arrow" style="height: 12px;"></div>
-                        <div class="fc-input">Input Email & Password</div>
-                    </div>
-                    <div class="branch-item">
-                        <span class="label">Ya</span>
-                        <div class="fc-process" style="min-width: 80px; font-size: 11px;">Lanjut</div>
-                    </div>
-                </div>
                 <div class="arrow"></div>
                 <div class="fc-process">Tambah ke Keranjang</div>
                 <div class="arrow"></div>
@@ -124,19 +103,19 @@
                 <div class="arrow"></div>
                 <div class="fc-process">Checkout</div>
                 <div class="arrow"></div>
-                <div class="fc-input">Input Data Pengiriman</div>
+                <div class="fc-input">Input Data Kirim</div>
                 <div class="arrow"></div>
                 <div class="fc-decision">Metode<br>Bayar?</div>
-                <div class="branch">
-                    <div class="branch-item">
-                        <span class="label">COD</span>
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded">COD</span>
+                        <div class="arrow" style="height: 12px;"></div>
                         <div class="fc-process" style="min-width: 80px; font-size: 11px;">Lanjut</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">QRIS</span>
-                        <div class="fc-display" style="font-size: 11px;">Tampil QR</div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-2 py-1 rounded">QRIS</span>
                         <div class="arrow" style="height: 12px;"></div>
-                        <div class="fc-input">Upload Bukti</div>
+                        <div class="fc-input" style="font-size: 10px;">Upload Bukti</div>
                     </div>
                 </div>
                 <div class="arrow"></div>
@@ -144,283 +123,263 @@
                 <div class="arrow"></div>
                 <div class="fc-display">Konfirmasi Pesanan</div>
                 <div class="arrow"></div>
-                <div class="fc-process">Lacak Status Pesanan</div>
+                <div class="fc-process">Tracking Pesanan</div>
                 <div class="arrow"></div>
                 <div class="fc-terminal">SELESAI</div>
             </div>
-        </div>
+        </section>
 
-        <!-- Flowchart Admin -->
-        <div id="admin" class="tab-content bg-white rounded-b-xl lg:rounded-xl shadow-lg p-6 overflow-x-auto">
-            <h2 class="text-xl font-bold text-gray-900 mb-1">🔧 Alur Proses Admin</h2>
-            <p class="text-gray-600 text-sm mb-6">Proses manajemen sistem oleh admin</p>
-            
-            <div class="flex flex-col items-center gap-3" style="min-width: 450px;">
+        <!-- ADMIN FLOWCHART -->
+        <section id="admin" class="section bg-white rounded-b-xl lg:rounded-2xl shadow-lg p-6 overflow-x-auto">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">🔧 Flowchart Admin</h2>
+            <div class="flex flex-col items-center gap-3 min-w-max pb-4">
                 <div class="fc-terminal">MULAI</div>
                 <div class="arrow"></div>
-                <div class="fc-display">Halaman Login Admin</div>
-                <div class="arrow"></div>
-                <div class="fc-input">Input Email & Password</div>
+                <div class="fc-input">Login Admin</div>
                 <div class="arrow"></div>
                 <div class="fc-decision">Valid?</div>
-                <div class="branch">
-                    <div class="branch-item">
-                        <span class="label">Tidak</span>
-                        <div class="fc-display" style="font-size: 11px;">Pesan Error</div>
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-red-700 bg-red-100 px-2 py-1 rounded">Tidak</span>
+                        <div class="arrow" style="height: 16px;"></div>
+                        <div class="fc-display" style="font-size: 11px;">Error Login</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">Ya</span>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded">Ya</span>
+                        <div class="arrow" style="height: 16px;"></div>
                         <div class="fc-process" style="min-width: 80px; font-size: 11px;">Lanjut</div>
                     </div>
                 </div>
                 <div class="arrow"></div>
-                <div class="fc-display">Dashboard Admin</div>
-                <div class="arrow"></div>
-                <div class="fc-process">Lihat Statistik & Grafik</div>
+                <div class="fc-display">Dashboard</div>
                 <div class="arrow"></div>
                 <div class="fc-decision">Pilih<br>Menu?</div>
-                <div class="branch">
-                    <div class="branch-item">
-                        <span class="label">Pesanan</span>
-                        <div class="fc-display" style="font-size: 10px;">Daftar Pesanan</div>
-                        <div class="arrow" style="height: 10px;"></div>
-                        <div class="fc-input" style="font-size: 10px; min-width: 100px;">Filter Status</div>
-                        <div class="arrow" style="height: 10px;"></div>
-                        <div class="fc-process" style="font-size: 10px; min-width: 100px;">Update Status</div>
+                <div class="grid grid-cols-2 gap-6 my-2">
+                    <div class="flex flex-col items-center gap-2 bg-gray-50 p-3 rounded-lg border-2 border-dashed border-gray-300">
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2 py-1 rounded">Pesanan</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-process" style="font-size: 10px;">Kelola Pesanan</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-input" style="font-size: 10px;">Update Status</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">Produk</span>
-                        <div class="fc-display" style="font-size: 10px;">Daftar Produk</div>
-                        <div class="arrow" style="height: 10px;"></div>
-                        <div class="fc-decision" style="width: 70px; height: 70px; font-size: 9px;">Aksi?</div>
-                        <div style="display: flex; gap: 6px; font-size: 9px;">
-                            <div class="fc-process" style="padding: 6px; min-width: 50px;">Tambah</div>
-                            <div class="fc-process" style="padding: 6px; min-width: 50px;">Edit</div>
-                            <div class="fc-process" style="padding: 6px; min-width: 50px;">Hapus</div>
-                        </div>
+                    <div class="flex flex-col items-center gap-2 bg-gray-50 p-3 rounded-lg border-2 border-dashed border-gray-300">
+                        <span class="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded">Produk</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-process" style="font-size: 10px;">CRUD Produk</div>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-input" style="font-size: 10px;">Kelola Stock</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">Kategori</span>
-                        <div class="fc-display" style="font-size: 10px;">Kelola Kategori</div>
-                        <div class="arrow" style="height: 10px;"></div>
-                        <div class="fc-process" style="font-size: 10px; min-width: 100px;">CRUD Kategori</div>
+                    <div class="flex flex-col items-center gap-2 bg-gray-50 p-3 rounded-lg border-2 border-dashed border-gray-300">
+                        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-2 py-1 rounded">Kategori</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-process" style="font-size: 10px;">CRUD Kategori</div>
                     </div>
-                    <div class="branch-item">
-                        <span class="label">Staff</span>
-                        <div class="fc-display" style="font-size: 10px;">Kelola Staff</div>
-                        <div class="arrow" style="height: 10px;"></div>
-                        <div class="fc-process" style="font-size: 10px; min-width: 100px;">CRUD Staff</div>
+                    <div class="flex flex-col items-center gap-2 bg-gray-50 p-3 rounded-lg border-2 border-dashed border-gray-300">
+                        <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded">Staff</span>
+                        <div class="arrow" style="height: 12px;"></div>
+                        <div class="fc-process" style="font-size: 10px;">Manajemen Staff</div>
                     </div>
                 </div>
                 <div class="arrow"></div>
                 <div class="fc-process">Simpan Perubahan</div>
                 <div class="arrow"></div>
-                <div class="fc-display">Konfirmasi Sukses</div>
-                <div class="arrow"></div>
                 <div class="fc-terminal">SELESAI</div>
             </div>
-        </div>
+        </section>
 
         <!-- ERD -->
-        <div id="erd" class="tab-content bg-white rounded-b-xl lg:rounded-xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-1">🗃️ Entity Relationship Diagram</h2>
-            <p class="text-gray-600 text-sm mb-6">Struktur database dengan 10 tabel relasional</p>
+        <section id="erd" class="section bg-white rounded-b-xl lg:rounded-2xl shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">🗃️ ERD Database (fotokopi_db)</h2>
             
+            <!-- Entities Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div class="erd-table">
-                    <div class="erd-header">👤 users</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span>email</span><span>VARCHAR UNQ</span></div>
-                    <div class="erd-row"><span>password</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>name</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>is_admin</span><span>BOOLEAN</span></div>
-                    <div class="erd-row"><span>phone</span><span>VARCHAR</span></div>
+                
+                <div class="erd-entity">
+                    <div class="erd-title">👤 users</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span>email</span><span class="text-gray-500">UNIQUE</span></div>
+                    <div class="erd-attr"><span>password</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>is_admin</span><span class="text-gray-500">BOOLEAN</span></div>
+                    <div class="erd-attr"><span>photo_path</span><span class="text-gray-500">VARCHAR</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">📦 orders</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 user_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>status</span><span>ENUM</span></div>
-                    <div class="erd-row"><span>total</span><span>DECIMAL</span></div>
-                    <div class="erd-row"><span>payment_method</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>payment_status</span><span>VARCHAR</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">📁 categories</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span>name</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>slug</span><span class="text-gray-500">UNIQUE</span></div>
+                    <div class="erd-attr"><span>description</span><span class="text-gray-500">TEXT</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">🏷️ products</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 category_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>name</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>price</span><span>DECIMAL</span></div>
-                    <div class="erd-row"><span>stock</span><span>INT</span></div>
-                    <div class="erd-row"><span>is_service</span><span>BOOLEAN</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">🏷️ products</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 category_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>name</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>price</span><span class="text-gray-500">DECIMAL</span></div>
+                    <div class="erd-attr"><span>stock</span><span class="text-gray-500">INT</span></div>
+                    <div class="erd-attr"><span>is_service</span><span class="text-gray-500">BOOLEAN</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">📁 categories</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span>name</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>slug</span><span>VARCHAR UNQ</span></div>
-                    <div class="erd-row"><span>description</span><span>TEXT</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">🛒 carts</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 user_id</span><span class="text-gray-500">FK</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">🛒 carts</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 user_id</span><span>BIGINT FK UNQ</span></div>
-                    <div class="erd-row"><span>created_at</span><span>TIMESTAMP</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">🛍️ cart_items</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 cart_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 product_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>qty</span><span class="text-gray-500">INT</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">🛍️ cart_items</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 cart_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 product_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>qty</span><span>INT</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">📦 orders</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 user_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>status</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>total</span><span class="text-gray-500">DECIMAL</span></div>
+                    <div class="erd-attr"><span>payment_method</span><span class="text-gray-500">VARCHAR</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">📋 order_items</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 order_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 product_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>qty</span><span>INT</span></div>
-                    <div class="erd-row"><span>price</span><span>DECIMAL</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">📋 order_items</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 order_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 product_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>qty</span><span class="text-gray-500">INT</span></div>
+                    <div class="erd-attr"><span>price</span><span class="text-gray-500">DECIMAL</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">📍 order_tracks</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 order_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>status</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>location</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>note</span><span>TEXT</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">📍 order_tracks</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 order_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>status</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>location</span><span class="text-gray-500">VARCHAR</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">📍 addresses</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 user_id</span><span>BIGINT FK</span></div>
-                    <div class="erd-row"><span>recipient</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>phone</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>full_address</span><span>TEXT</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">📍 addresses</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 user_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>recipient</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>phone</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>full_address</span><span class="text-gray-500">TEXT</span></div>
                 </div>
 
-                <div class="erd-table">
-                    <div class="erd-header">👨‍💼 staff</div>
-                    <div class="erd-row"><span class="erd-pk">🔑 id</span><span>BIGINT PK</span></div>
-                    <div class="erd-row"><span class="erd-fk">🔗 user_id</span><span>BIGINT FK UNQ</span></div>
-                    <div class="erd-row"><span>role</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>position</span><span>VARCHAR</span></div>
-                    <div class="erd-row"><span>salary</span><span>DECIMAL</span></div>
+                <div class="erd-entity">
+                    <div class="erd-title">👨‍💼 staff</div>
+                    <div class="erd-attr"><span class="erd-pk">🔑 id</span><span class="text-gray-500">PK</span></div>
+                    <div class="erd-attr"><span class="erd-fk">🔗 user_id</span><span class="text-gray-500">FK</span></div>
+                    <div class="erd-attr"><span>staff_id</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>role</span><span class="text-gray-500">VARCHAR</span></div>
+                    <div class="erd-attr"><span>salary</span><span class="text-gray-500">DECIMAL</span></div>
                 </div>
+
             </div>
 
-            <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-4">
-                <h3 class="font-bold text-gray-900 mb-2">🔗 Relasi Tabel</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-700">
-                    <div>• users (1) → (N) orders</div>
-                    <div>• users (1) → (1) carts</div>
-                    <div>• users (1) → (N) addresses</div>
-                    <div>• users (1) → (1) staff</div>
-                    <div>• categories (1) → (N) products</div>
-                    <div>• orders (1) → (N) order_items</div>
-                    <div>• orders (1) → (N) order_tracks</div>
-                    <div>• carts (1) → (N) cart_items</div>
-                    <div>• products (1) → (N) cart_items</div>
-                    <div>• products (1) → (N) order_items</div>
+            <!-- Relationships -->
+            <div class="bg-indigo-50 rounded-xl p-4 border-2 border-indigo-200">
+                <h3 class="font-bold text-gray-900 mb-3 text-sm">🔗 Relasi Tabel (Crow's Foot)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                    <div class="lrs-box text-xs">users (1) ← → (N) orders</div>
+                    <div class="lrs-box text-xs">users (1) ← → (1) carts</div>
+                    <div class="lrs-box text-xs">users (1) ← → (N) addresses</div>
+                    <div class="lrs-box text-xs">users (1) ← → (1) staff</div>
+                    <div class="lrs-box text-xs">categories (1) ← → (N) products</div>
+                    <div class="lrs-box text-xs">products (1) ← → (N) order_items</div>
+                    <div class="lrs-box text-xs">products (1) ← → (N) cart_items</div>
+                    <div class="lrs-box text-xs">orders (1) ← → (N) order_items</div>
+                    <div class="lrs-box text-xs">orders (1) ← → (N) order_tracks</div>
+                    <div class="lrs-box text-xs">carts (1) ← → (N) cart_items</div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- LRS -->
-        <div id="lrs" class="tab-content bg-white rounded-b-xl lg:rounded-xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-1">📋 Layanan Rencana Sistem</h2>
-            <p class="text-gray-600 text-sm mb-6">Dokumentasi lengkap sistem Fotokopiku</p>
+        <section id="lrs" class="section bg-white rounded-b-xl lg:rounded-2xl shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">📋 LRS - Layanan Rencana Sistem</h2>
             
-            <div class="lrs-section">
-                <div class="lrs-title">📌 Deskripsi Sistem</div>
-                <div class="lrs-content">
-                    Fotokopiku adalah platform e-commerce terintegrasi untuk layanan fotokopi, print, laminating, jilid, dan penjualan ATK secara online dengan sistem pemesanan 24/7, tracking real-time, dan pembayaran digital (QRIS/COD).
+            <div class="space-y-4">
+                <!-- Deskripsi -->
+                <div class="lrs-box">
+                    <h3 class="font-bold text-indigo-700 mb-2">📌 Deskripsi Sistem</h3>
+                    <p class="text-sm text-gray-700">Platform e-commerce fotokopi online untuk layanan print, fotokopi, laminating, jilid, dan ATK dengan sistem pemesanan, tracking, dan pembayaran terintegrasi.</p>
                 </div>
-            </div>
 
-            <div class="lrs-section">
-                <div class="lrs-title">🎯 Tujuan Sistem</div>
-                <div class="lrs-content">
-                    • Menyediakan platform pemesanan online 24/7<br>
-                    • Meningkatkan efisiensi layanan pelanggan<br>
-                    • Memberikan transparansi harga & status pesanan<br>
-                    • Memudahkan manajemen inventory & laporan
+                <!-- Tujuan -->
+                <div class="lrs-box">
+                    <h3 class="font-bold text-indigo-700 mb-2">🎯 Tujuan</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Platform pemesanan 24/7 online</li>
+                        <li>• Meningkatkan efisiensi layanan</li>
+                        <li>• Transparansi harga & status real-time</li>
+                        <li>• Manajemen inventory otomatis</li>
+                    </ul>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="lrs-section">
-                    <div class="lrs-title">👤 Fitur User</div>
-                    <div class="lrs-content">
-                        • Registrasi & Login<br>
-                        • Browse & Filter Produk<br>
-                        • Keranjang Belanja<br>
-                        • Checkout & Pembayaran<br>
-                        • Tracking Pesanan<br>
-                        • Download Invoice
+                <!-- Fitur -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="lrs-box">
+                        <h3 class="font-bold text-indigo-700 mb-2">👤 Fitur User</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>✓ Browse katalog & filter</li>
+                            <li>✓ Kelola keranjang</li>
+                            <li>✓ Checkout & pembayaran</li>
+                            <li>✓ Tracking pesanan</li>
+                            <li>✓ Download invoice</li>
+                        </ul>
+                    </div>
+                    <div class="lrs-box">
+                        <h3 class="font-bold text-indigo-700 mb-2">🔧 Fitur Admin</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>✓ Dashboard analytics</li>
+                            <li>✓ Kelola pesanan</li>
+                            <li>✓ CRUD produk & kategori</li>
+                            <li>✓ Manajemen staff</li>
+                            <li>✓ Laporan penjualan</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="lrs-section">
-                    <div class="lrs-title">🔧 Fitur Admin</div>
-                    <div class="lrs-content">
-                        • Dashboard Analytics<br>
-                        • Kelola Pesanan<br>
-                        • Update Status & Tracking<br>
-                        • CRUD Produk & Kategori<br>
-                        • Manajemen Staff<br>
-                        • Laporan Penjualan
+                <!-- Teknologi -->
+                <div class="lrs-box">
+                    <h3 class="font-bold text-indigo-700 mb-2">⚙️ Teknologi</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-700">
+                        <div><strong>Backend:</strong> Laravel 10</div>
+                        <div><strong>Frontend:</strong> Tailwind CSS</div>
+                        <div><strong>Database:</strong> MySQL 8.0</div>
+                        <div><strong>Payment:</strong> QRIS & COD</div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="lrs-box">
+                    <h3 class="font-bold text-indigo-700 mb-2">📅 Timeline Implementasi</h3>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <div><strong>Fase 1:</strong> Planning & Design (1-2 minggu)</div>
+                        <div><strong>Fase 2:</strong> Backend Development (2-3 minggu)</div>
+                        <div><strong>Fase 3:</strong> Frontend Development (2-3 minggu)</div>
+                        <div><strong>Fase 4:</strong> Testing & Integration (1-2 minggu)</div>
+                        <div><strong>Fase 5:</strong> Deployment (1 minggu)</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="lrs-section">
-                <div class="lrs-title">⚙️ Teknologi</div>
-                <div class="lrs-content">
-                    <strong>Backend:</strong> Laravel 10, PHP 8.2, Blade Templates<br>
-                    <strong>Frontend:</strong> Tailwind CSS 3, Alpine.js, Responsive Design<br>
-                    <strong>Database:</strong> MySQL 8.0, 10 tabel relasional<br>
-                    <strong>Tools:</strong> Laravel Breeze, Barryvdh PDF, CORS Support
-                </div>
-            </div>
-
-            <div class="lrs-section">
-                <div class="lrs-title">📅 Timeline Implementasi</div>
-                <div class="lrs-content">
-                    <strong>Fase 1:</strong> Planning & Design (1-2 minggu)<br>
-                    <strong>Fase 2:</strong> Backend Development (2-3 minggu)<br>
-                    <strong>Fase 3:</strong> Frontend Development (2-3 minggu)<br>
-                    <strong>Fase 4:</strong> Integration & Testing (1-2 minggu)<br>
-                    <strong>Fase 5:</strong> Deployment (1 minggu)<br>
-                    <strong>Total:</strong> 8-12 minggu
-                </div>
-            </div>
-
-            <div class="lrs-section bg-gradient-to-r from-indigo-50 to-purple-50">
-                <div class="lrs-title">✨ Kesimpulan</div>
-                <div class="lrs-content">
-                    Sistem Fotokopiku dirancang dengan arsitektur modern menggunakan Laravel 10 dan MySQL 8.0, dengan 10 tabel database relasional, 2 role utama (user & admin), pembayaran QRIS/COD, dan fitur tracking real-time untuk memberikan pengalaman terbaik bagi pelanggan.
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="max-w-6xl mx-auto text-center py-6 mt-8 text-gray-600 text-sm border-t border-gray-200">
-        <p class="font-medium">📄 Dokumentasi Fotokopiku - Web Programming 2 | 2025</p>
+    <footer class="max-w-6xl mx-auto text-center py-6 text-gray-600 text-sm mt-6">
+        <p>📊 Dokumentasi FotokopiKu | Semester 3 - Web Programming 2 | 2025</p>
     </footer>
 
     <script>
         function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tab).classList.add('active');
             event.target.classList.add('active');
