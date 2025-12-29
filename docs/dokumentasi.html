@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Fotokopiku - Flowchart, ERD & LRS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.bunny.net/css?family=inter:400,500,600,700');
+        * { font-family: 'Inter', sans-serif; }
+        body { background: linear-gradient(135deg, #F3F4F6, #FFFFFF); }
+        
+        /* Flowchart Styles ISO 5807 */
+        .fc-oval { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(79,70,229,0.2); }
+        .fc-rect { background: white; border: 2px solid #6366F1; color: #1F2937; padding: 12px 20px; border-radius: 4px; font-weight: 500; font-size: 11px; text-align: center; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); min-width: 140px; }
+        .fc-diamond { background: #FEF3C7; border: 2px solid #F59E0B; color: #92400E; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); font-weight: 600; font-size: 10px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .fc-input { background: #ECFDF5; border: 2px solid #10B981; color: #065F46; padding: 10px 20px; clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); font-weight: 500; font-size: 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .fc-display { background: #F3E8FF; border: 2px solid #A855F7; color: #6B21A8; padding: 10px 18px; border-radius: 3px 14px 14px 3px; font-weight: 500; font-size: 11px; text-align: center; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .arrow { width: 2px; height: 20px; background: #6366F1; margin: 0 auto; position: relative; }
+        .arrow::after { content: ''; position: absolute; bottom: -5px; left: -5px; border: 5px solid transparent; border-top: 6px solid #6366F1; }
+        
+        .flowchart-column { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .branch { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
+        .branch-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .label { font-size: 10px; font-weight: 700; color: #4F46E5; background: #E0E7FF; padding: 2px 8px; border-radius: 2px; }
+        
+        /* Tab Styles */
+        .tab-btn { padding: 10px 18px; font-weight: 600; cursor: pointer; border: 2px solid transparent; background: #E5E7EB; color: #374151; border-radius: 6px 6px 0 0; transition: all 0.2s; }
+        .tab-btn.active { background: white; color: #4F46E5; border-color: #4F46E5; box-shadow: 0 -2px 6px rgba(0,0,0,0.05); }
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        /* Card Styles */
+        .card { background: white; border-radius: 8px; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 20px; }
+        
+        /* ERD Table */
+        .erd-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .erd-table td { padding: 8px; border-bottom: 1px solid #E5E7EB; }
+        .erd-table tr:last-child td { border-bottom: none; }
+        .erd-pk { color: #DC2626; font-weight: 700; }
+        .erd-fk { color: #2563EB; font-weight: 600; }
+        .erd-title { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 8px 12px; border-radius: 4px 4px 0 0; font-weight: 700; font-size: 11px; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tab-btn { padding: 8px 12px; font-size: 11px; }
+            .fc-rect, .fc-input { min-width: 100px; padding: 8px 12px; font-size: 9px; }
+            .branch { gap: 12px; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto mb-8">
+        <div class="card">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xl font-bold">📊</div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Fotokopiku</h1>
+                    <p class="text-gray-600 text-sm">Dokumentasi Sistem - Flowchart, ERD & LRS</p>
+                </div>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Laravel 10</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">MySQL 8</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">Tailwind CSS</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tabs Navigation -->
+    <div class="max-w-6xl mx-auto mb-6">
+        <div class="flex gap-2 bg-white rounded-t-lg p-2 border-b border-gray-200">
+            <button onclick="switchTab('flowchart-user')" class="tab-btn active">👤 Flowchart User</button>
+            <button onclick="switchTab('flowchart-admin')" class="tab-btn">🔧 Flowchart Admin</button>
+            <button onclick="switchTab('erd')" class="tab-btn">🗄️ ERD Database</button>
+            <button onclick="switchTab('lrs')" class="tab-btn">📋 LRS Sistem</button>
+        </div>
+    </div>
+
+    <!-- Flowchart User -->
+    <section id="flowchart-user" class="section active max-w-6xl mx-auto mb-8">
+        <div class="card">
+            <h2 class="text-xl font-bold text-gray-900 mb-1">👤 Flowchart User / Pelanggan</h2>
+            <p class="text-sm text-gray-600 mb-6">Alur proses pelanggan dari membuka website hingga menerima pesanan</p>
+            <div class="overflow-x-auto pb-4">
+                <div class="flowchart-column" style="min-width: 400px;">
+                    <div class="fc-oval">🚀 MULAI</div>
+                    <div class="arrow"></div>
+                    <div class="fc-rect">Buka Website</div>
+                    <div class="arrow"></div>
+                    <div class="fc-display">📱 Lihat Katalog</div>
+                    <div class="arrow"></div>
+                    <div class="fc-diamond">Filter?</div>
+                    <div class="branch">
+                        <div class="branch-item">
+                            <span class="label">Ya</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-input">Pilih Kategori</div>
+                        </div>
+                        <div class="branch-item">
+                            <span class="label">Tidak</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Lanjut</div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="fc-rect">Pilih Produk</div>
+                    <div class="arrow"></div>
+                    <div class="fc-diamond">Sudah<br>Login?</div>
+                    <div class="branch">
+                        <div class="branch-item">
+                            <span class="label">Tidak</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-display">📝 Login</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-input">Email & Password</div>
+                        </div>
+                        <div class="branch-item">
+                            <span class="label">Ya</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Lanjut</div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="fc-rect">Keranjang & Checkout</div>
+                    <div class="arrow"></div>
+                    <div class="fc-input">Pilih Alamat & Metode Kirim</div>
+                    <div class="arrow"></div>
+                    <div class="fc-diamond">Metode<br>Bayar?</div>
+                    <div class="branch">
+                        <div class="branch-item">
+                            <span class="label">COD</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Buat Order</div>
+                        </div>
+                        <div class="branch-item">
+                            <span class="label">QRIS</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-display">💳 Scan QR</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-input">Upload Bukti</div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="fc-display">✅ Konfirmasi Pesanan</div>
+                    <div class="arrow"></div>
+                    <div class="fc-rect">Lacak Pesanan</div>
+                    <div class="arrow"></div>
+                    <div class="fc-oval">✨ SELESAI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowchart Admin -->
+    <section id="flowchart-admin" class="section max-w-6xl mx-auto mb-8">
+        <div class="card">
+            <h2 class="text-xl font-bold text-gray-900 mb-1">🔧 Flowchart Admin / Staff</h2>
+            <p class="text-sm text-gray-600 mb-6">Alur proses admin dalam mengelola dashboard dan pesanan</p>
+            <div class="overflow-x-auto pb-4">
+                <div class="flowchart-column" style="min-width: 400px;">
+                    <div class="fc-oval">🚀 MULAI</div>
+                    <div class="arrow"></div>
+                    <div class="fc-rect">Buka Website</div>
+                    <div class="arrow"></div>
+                    <div class="fc-display">📝 Halaman Login</div>
+                    <div class="arrow"></div>
+                    <div class="fc-input">Email & Password Admin</div>
+                    <div class="arrow"></div>
+                    <div class="fc-diamond">Valid?</div>
+                    <div class="branch">
+                        <div class="branch-item">
+                            <span class="label">Tidak</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-display">❌ Error</div>
+                        </div>
+                        <div class="branch-item">
+                            <span class="label">Ya</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Lanjut</div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="fc-display">📊 Dashboard</div>
+                    <div class="arrow"></div>
+                    <div class="fc-diamond">Menu?</div>
+                    <div class="branch">
+                        <div class="branch-item" style="min-width: 120px;">
+                            <span class="label">Pesanan</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-display">📦 Daftar Pesanan</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-input" style="font-size: 9px;">Update Status</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Simpan</div>
+                        </div>
+                        <div class="branch-item" style="min-width: 120px;">
+                            <span class="label">Produk</span>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-display">🛍️ Kelola Produk</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-input" style="font-size: 9px;">CRUD Produk</div>
+                            <div class="arrow" style="height: 12px;"></div>
+                            <div class="fc-rect" style="min-width: 80px;">Simpan</div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="fc-oval">✨ SELESAI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ERD Database -->
+    <section id="erd" class="section max-w-6xl mx-auto mb-8">
+        <div class="card">
+            <h2 class="text-xl font-bold text-gray-900 mb-1">🗄️ Entity Relationship Diagram (ERD)</h2>
+            <p class="text-sm text-gray-600 mb-6">Diagram relasi 10 tabel database Fotokopiku dengan notasi Crow's Foot</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <!-- Users Table -->
+                <div>
+                    <div class="erd-title">👤 users</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td>email (UNIQUE)</td></tr>
+                        <tr><td>is_admin (BOOLEAN)</td></tr>
+                        <tr><td>password</td></tr>
+                        <tr><td>phone</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Orders Table -->
+                <div>
+                    <div class="erd-title">📦 orders</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 user_id</span></td></tr>
+                        <tr><td>status (ENUM)</td></tr>
+                        <tr><td>payment_method</td></tr>
+                        <tr><td>total (DECIMAL)</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Products Table -->
+                <div>
+                    <div class="erd-title">🛍️ products</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 category_id</span></td></tr>
+                        <tr><td>name</td></tr>
+                        <tr><td>price (DECIMAL)</td></tr>
+                        <tr><td>stock (INT)</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Categories Table -->
+                <div>
+                    <div class="erd-title">📁 categories</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td>name</td></tr>
+                        <tr><td>slug (UNIQUE)</td></tr>
+                        <tr><td>description</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Carts Table -->
+                <div>
+                    <div class="erd-title">🛒 carts</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 user_id</span></td></tr>
+                        <tr><td>created_at</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Cart Items Table -->
+                <div>
+                    <div class="erd-title">🛍️ cart_items</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 cart_id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 product_id</span></td></tr>
+                        <tr><td>qty (INT)</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Order Items Table -->
+                <div>
+                    <div class="erd-title">📋 order_items</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 order_id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 product_id</span></td></tr>
+                        <tr><td>qty & price</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Order Tracks Table -->
+                <div>
+                    <div class="erd-title">📍 order_tracks</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 order_id</span></td></tr>
+                        <tr><td>status</td></tr>
+                        <tr><td>location</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Addresses Table -->
+                <div>
+                    <div class="erd-title">📍 addresses</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 user_id</span></td></tr>
+                        <tr><td>recipient</td></tr>
+                        <tr><td>full_address</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Staff Table -->
+                <div>
+                    <div class="erd-title">👨‍💼 staff</div>
+                    <table class="erd-table">
+                        <tr><td><span class="erd-pk">🔑 id</span></td></tr>
+                        <tr><td><span class="erd-fk">🔗 user_id</span></td></tr>
+                        <tr><td>role</td></tr>
+                        <tr><td>salary</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-4">
+                <h3 class="font-bold text-indigo-900 text-sm mb-2">🔗 Relasi Tabel (Crow's Foot Notation)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-gray-700">
+                    <div>• users (1) ← → (N) orders</div>
+                    <div>• users (1) ← → (1) carts</div>
+                    <div>• users (1) ← → (N) addresses</div>
+                    <div>• users (1) ← → (1) staff</div>
+                    <div>• categories (1) ← → (N) products</div>
+                    <div>• orders (1) ← → (N) order_items</div>
+                    <div>• orders (1) ← → (N) order_tracks</div>
+                    <div>• products (1) ← → (N) order_items</div>
+                    <div>• carts (1) ← → (N) cart_items</div>
+                    <div>• products (1) ← → (N) cart_items</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LRS System -->
+    <section id="lrs" class="section max-w-6xl mx-auto mb-8">
+        <div class="card">
+            <h2 class="text-xl font-bold text-gray-900 mb-1">📋 Layanan Rencana Sistem (LRS)</h2>
+            <p class="text-sm text-gray-600 mb-6">Dokumentasi lengkap sistem Fotokopiku</p>
+
+            <div class="space-y-4">
+                <!-- Deskripsi & Tujuan -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 text-sm mb-2">📌 Deskripsi & Tujuan Sistem</h3>
+                    <p class="text-xs text-gray-700 mb-2"><strong>Deskripsi:</strong> Fotokopiku adalah platform e-commerce untuk layanan fotokopi, print, laminating, jilid, dan penjualan ATK online dengan system pemesanan, tracking, dan pembayaran terintegrasi.</p>
+                    <p class="text-xs text-gray-700"><strong>Tujuan:</strong> (1) Menyediakan platform 24/7 (2) Meningkatkan efisiensi layanan (3) Transparansi harga & status real-time (4) Memudahkan manajemen inventory & pesanan</p>
+                </div>
+
+                <!-- Kebutuhan -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 text-sm mb-2">📊 Kebutuhan Sistem</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-gray-700">
+                        <div><strong>User:</strong> Registrasi, browse, filter, keranjang, checkout, tracking, invoice</div>
+                        <div><strong>Admin:</strong> Login, dashboard, kelola pesanan, CRUD produk/kategori, tracking</div>
+                        <div><strong>Database:</strong> 10 tabel, relasi 1:1 dan 1:N, indexed columns, FK constraints</div>
+                        <div><strong>Non-Fungsional:</strong> Responsive, < 2s loading, 99.5% uptime, security HTTPS</div>
+                    </div>
+                </div>
+
+                <!-- Requirement Fungsional -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 text-sm mb-2">✅ Requirement Fungsional (5 FR)</h3>
+                    <div class="space-y-2 text-xs text-gray-700">
+                        <p><strong>FR1 Autentikasi:</strong> Registrasi, login dengan email/password, role-based access (is_admin)</p>
+                        <p><strong>FR2 Katalog:</strong> Browse produk, filter kategori, search, sort harga, detail produk</p>
+                        <p><strong>FR3 Keranjang:</strong> Add/edit/remove item, checkout, input alamat, pilih metode kirim & bayar</p>
+                        <p><strong>FR4 Pesanan:</strong> Buat order, update status, tracking lokasi, generate invoice PDF</p>
+                        <p><strong>FR5 Tracking:</strong> Status real-time (pending→diproses→selesai), lihat lokasi, riwayat pesanan</p>
+                    </div>
+                </div>
+
+                <!-- Fitur & Teknologi -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <h3 class="font-bold text-gray-900 text-sm mb-2">🎯 Fitur (24 total) & Teknologi</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-gray-700">
+                        <div><strong>Fitur User:</strong> Registrasi, Browse, Filter, Keranjang, Checkout, Tracking, Invoice, Alamat</div>
+                        <div><strong>Fitur Admin:</strong> Login, Dashboard, Pesanan, Status, Tracking, CRUD Produk, CRUD Kategori, Staff</div>
+                        <div><strong>Backend:</strong> Laravel 10, PHP 8.2, Blade Engine</div>
+                        <div><strong>Frontend:</strong> Tailwind CSS 3, Alpine.js, Responsive</div>
+                        <div><strong>Database:</strong> MySQL 8.0, 10 tables, Indexed columns</div>
+                        <div><strong>Tools:</strong> Barryvdh PDF, QRIS/COD Payment, Laravel Breeze</div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                    <h3 class="font-bold text-indigo-900 text-sm mb-2">📅 Timeline Implementasi (8-12 Minggu)</h3>
+                    <div class="space-y-1 text-xs text-indigo-900">
+                        <p><strong>Fase 1 (1-2 mg):</strong> Planning, database design, wireframe</p>
+                        <p><strong>Fase 2 (2-3 mg):</strong> Backend - models, migrations, controllers, authentication</p>
+                        <p><strong>Fase 3 (2-3 mg):</strong> Frontend - Blade views, responsive design, forms</p>
+                        <p><strong>Fase 4 (1-2 mg):</strong> Testing, payment integration, bug fixing</p>
+                        <p><strong>Fase 5 (1 mg):</strong> Deployment, server setup, user training</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto text-center py-6 text-xs text-gray-600 border-t border-gray-200 mt-8">
+        <p class="font-semibold">Dokumentasi Fotokopiku | Semester 3 - Web Programming 2</p>
+        <p>Versi 3.0 - Minimalis, Modern, Responsive | 2025</p>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
