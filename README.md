@@ -4,6 +4,47 @@
 
 ---
 
+## 📊 Dokumentasi Sistem (Flowchart, ERD, LRS)
+
+Dokumentasi lengkap sistem Fotokopiku tersedia dalam file HTML yang mencakup:
+- **👤 Flowchart User**: Alur proses pemesanan dari sisi pelanggan
+- **🔧 Flowchart Admin**: Alur proses manajemen dari sisi admin  
+- **🗃️ ERD**: Struktur database 10 tabel relasional (Crow's Foot Notation)
+- **📋 LRS**: Layanan Rencana Sistem lengkap
+
+### 🌐 Cara Melihat Dokumentasi
+
+**📂 Lokasi File:** `docs/dokumentasi.html`
+
+**Metode 1: Double-Click (Paling Mudah)**
+1. Buka folder `docs/` di project ini
+2. Double-click file `dokumentasi.html`
+3. File akan terbuka otomatis di browser
+
+**Metode 2: Via Terminal**
+```bash
+# Windows
+start docs/dokumentasi.html
+
+# macOS
+open docs/dokumentasi.html
+
+# Linux
+xdg-open docs/dokumentasi.html
+```
+
+**Metode 3: Via VS Code (dengan Live Server)**
+1. Buka file `docs/dokumentasi.html` di VS Code
+2. Klik kanan → "Open with Live Server"
+3. Atau tekan `Alt + L Alt + O`
+
+**Metode 4: Via URL (jika Laragon/server berjalan)**
+```
+http://localhost/fotokopi1/docs/dokumentasi.html
+```
+
+---
+
 ## 🎯 Apa Itu FotokopiKu?
 
 Platform e-commerce digital untuk layanan fotokopi dengan fitur lengkap:
@@ -194,70 +235,6 @@ Website ini **100% responsive** di semua perangkat:
 - ✅ Orders - adaptive card layout
 - ✅ Admin Dashboard - responsive stats grid
 - ✅ All auth pages (login, register)
-
----
-
-## 📚 Dokumentasi Sistem - Flowchart, ERD & LRS
-
-File dokumentasi lengkap Fotokopiku sudah tersedia dalam format HTML interaktif yang minimalis, modern, dan responsive.
-
-### 📖 Cara Membuka Dokumentasi
-
-#### **Opsi 1: Dari Browser (Paling Mudah)** ✨
-```
-1. Buka folder: \docs\
-2. Double-click file: dokumentasi.html
-3. Dokumentasi langsung terbuka di browser Anda
-```
-
-#### **Opsi 2: Dari Localhost (Saat Server Jalan)** 🌐
-```
-1. Pastikan Laravel server sudah running:
-   php artisan serve
-
-2. Buka browser dan akses:
-   http://localhost:8000/docs/dokumentasi.html
-   atau
-   http://127.0.0.1:8000/docs/dokumentasi.html
-```
-
-#### **Opsi 3: Live Server (VS Code Extension)** ⚡
-```
-1. Install extension: "Live Server" di VS Code
-2. Buka file: docs/dokumentasi.html
-3. Klik kanan → "Open with Live Server"
-4. Dokumentasi otomatis terbuka di browser
-```
-
-### 📋 Isi Dokumentasi
-
-Dokumentasi mencakup **4 bagian utama** yang bisa dipilih via tab:
-
-| Tab | Konten |
-|-----|--------|
-| 👤 **Flowchart User** | Alur pelanggan dari membuka website → menerima pesanan (ISO 5807 standard) |
-| 🔧 **Flowchart Admin** | Alur admin mengelola dashboard, pesanan, dan produk (ISO 5807 standard) |
-| 🗄️ **ERD Database** | 10 tabel database dengan relasi Crow's Foot notation |
-| 📋 **LRS Sistem** | Deskripsi, kebutuhan, FR, fitur, timeline, teknologi |
-
-### 🎨 Fitur Dokumentasi
-
-✅ **Minimalis & Modern** - Design clean dengan Tailwind CSS  
-✅ **Responsive** - Tampil sempurna di desktop, tablet, mobile  
-✅ **Bahasa Indonesia** - Semua isi dalam Bahasa Indonesia  
-✅ **Interactive Tabs** - Berpindah antar section dengan mudah  
-✅ **Standar Internasional** - Flowchart ISO 5807, ERD Crow's Foot  
-✅ **No Setup Required** - Buka file HTML langsung, tidak perlu install apa-apa  
-
-### 📂 Lokasi File
-
-```
-fotokopi1/
-├── docs/
-│   ├── dokumentasi.html          ← DOKUMENTASI UTAMA ⭐
-│   ├── flowchart-erd-lrs.html    ← Versi sebelumnya
-│   └── ...
-```
 
 ---
 
