@@ -14,8 +14,7 @@
         .fc-oval { background: linear-gradient(135deg, #4F46E5, #6366F1); color: white; padding: 14px 36px; border-radius: 50px; font-weight: 600; font-size: 13px; white-space: nowrap; box-shadow: 0 4px 12px rgba(79,70,229,0.3); display: inline-block; }
         .fc-rect { background: white; border: 2.5px solid #6366F1; color: #1F2937; padding: 14px 22px; border-radius: 6px; font-weight: 500; font-size: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); min-width: 170px; display: inline-block; }
         .fc-diamond { background: #FEF3C7; border: 2.5px solid #F59E0B; color: #92400E; width: 110px; height: 110px; display: flex; align-items: center; justify-content: center; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); font-weight: 600; font-size: 11px; text-align: center; }
-        .fc-io { background: #ECFDF5; border: 2.5px solid #10B981; color: #065F46; padding: 12px 18px; transform: skewX(-14deg); font-weight: 500; font-size: 11px; text-align: center; display: inline-block; }
-        .fc-io span { transform: skewX(14deg); display: block; }
+        .fc-input { background: #ECFDF5; border: 2.5px solid #10B981; color: #065F46; padding: 10px 24px; clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%); font-weight: 500; font-size: 11px; text-align: center; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
         .fc-display { background: #F3E8FF; border: 2.5px solid #9333EA; color: #6B21A8; padding: 12px 18px; border-radius: 4px 18px 18px 4px; font-weight: 500; font-size: 12px; text-align: center; display: inline-block; }
         
         .arrow { width: 2px; height: 28px; background: #6366F1; margin: 0 auto; position: relative; }
@@ -116,7 +115,7 @@
                     <div class="branch-item">
                         <span class="label">Ya</span>
                         <div class="arrow" style="height: 16px;"></div>
-                        <div class="fc-io"><span>Pilih Kategori</span></div>
+                        <div class="fc-input">Pilih Kategori</div>
                     </div>
                     <div class="branch-item">
                         <span class="label">Tidak</span>
@@ -136,7 +135,7 @@
                         <div class="arrow" style="height: 16px;"></div>
                         <div class="fc-display" style="font-size: 11px;">📝 Form Login</div>
                         <div class="arrow" style="height: 16px;"></div>
-                        <div style="background: #FFF7ED; border: 2.5px solid #F97316; padding: 10px; border-radius: 4px; font-size: 11px; color: #C2410C; font-weight: 500;">Input Email & Password</div>
+                        <div class="fc-input">Input Email & Password</div>
                     </div>
                     <div class="branch-item">
                         <span class="label">Ya</span>
@@ -157,7 +156,7 @@
                     <div class="branch-item">
                         <span class="label">Ya</span>
                         <div class="arrow" style="height: 16px;"></div>
-                        <div class="fc-io"><span>Update Qty</span></div>
+                        <div class="fc-input">Update Qty</div>
                     </div>
                     <div class="branch-item">
                         <span class="label">Tidak</span>
@@ -173,7 +172,7 @@
                 <div class="fc-display">📋 Form Checkout</div>
                 <div class="arrow"></div>
                 
-                <div style="background: #FFF7ED; border: 2.5px solid #F97316; padding: 10px; border-radius: 4px; font-size: 11px; color: #C2410C; font-weight: 500; display: inline-block;">Input Nama, No. WA, Alamat</div>
+                <div class="fc-input">Input Nama, No. WA, Alamat</div>
                 <div class="arrow"></div>
                 
                 <div class="fc-diamond">Metode<br>Kirim?</div>
@@ -186,7 +185,7 @@
                     <div class="branch-item">
                         <span class="label">Kirim</span>
                         <div class="arrow" style="height: 16px;"></div>
-                        <div class="fc-io"><span>Pilih Kota</span></div>
+                        <div class="fc-input">Pilih Kota</div>
                         <div class="arrow" style="height: 16px;"></div>
                         <div class="fc-rect" style="min-width: 100px; font-size: 11px;">Hitung Ongkir</div>
                     </div>
@@ -205,7 +204,7 @@
                         <div class="arrow" style="height: 16px;"></div>
                         <div class="fc-display" style="font-size: 11px;">📱 Tampil QR</div>
                         <div class="arrow" style="height: 16px;"></div>
-                        <div style="background: #FFF7ED; border: 2.5px solid #F97316; padding: 10px; border-radius: 4px; font-size: 11px; color: #C2410C; font-weight: 500;">Upload Bukti</div>
+                        <div class="fc-input">Upload Bukti</div>
                     </div>
                 </div>
                 <div class="arrow"></div>
@@ -264,7 +263,7 @@
                 <div class="fc-display">📝 Halaman Login Admin</div>
                 <div class="arrow"></div>
                 
-                <div style="background: #FFF7ED; border: 2.5px solid #F97316; padding: 10px; border-radius: 4px; font-size: 11px; color: #C2410C; font-weight: 500; display: inline-block;">Input Email & Password</div>
+                <div class="fc-input">Input Email & Password</div>
                 <div class="arrow"></div>
                 
                 <div class="fc-diamond">Valid?</div>
@@ -295,7 +294,7 @@
                         <div class="arrow" style="height: 14px;"></div>
                         <div class="fc-display" style="font-size: 10px;">📦 Daftar Pesanan</div>
                         <div class="arrow" style="height: 14px;"></div>
-                        <div class="fc-io" style="font-size: 10px;"><span>Filter Status</span></div>
+                        <div class="fc-input" style="font-size: 10px;">Filter Status</div>
                         <div class="arrow" style="height: 14px;"></div>
                         <div class="fc-diamond" style="width: 80px; height: 80px; font-size: 9px;">Aksi?</div>
                         <div style="font-size: 9px; margin-top: 6px;">
@@ -524,7 +523,236 @@
     <section id="lrs" class="section max-w-7xl mx-auto mb-8">
         <div class="bg-white rounded-b-2xl lg:rounded-3xl shadow-lg p-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-2">📋 Layanan Rencana Sistem (LRS)</h2>
-            <p class="text-gray-600 mb-8">Dokumentasi lengkap sistem Fotokopiku beserta komponen, fitur, dan timeline implementasi</p>
+            <p class="text-gray-600 mb-8">Dokumentasi lengkap sistem Fotokopiku - analisis kebutuhan, spesifikasi teknis, requirement fungsional, dan rencana implementasi</p>
+
+            <!-- 1. DESKRIPSI & TUJUAN -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">1️⃣ Deskripsi Sistem & Tujuan</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="lrs-card">
+                    <h4>📌 Deskripsi Sistem</h4>
+                    <p><strong>Fotokopiku</strong> adalah platform e-commerce terintegrasi yang menyediakan layanan fotokopi, print dokumen, laminating, jilid buku, dan penjualan alat tulis kantor (ATK) secara online. Sistem memfasilitasi pemesanan 24/7, tracking real-time, manajemen inventory otomatis, dan integrasi pembayaran digital (QRIS/COD) untuk meningkatkan efisiensi layanan dan kepuasan pelanggan.</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>🎯 Tujuan Sistem (4 Tujuan)</h4>
+                    <p><strong>T1 Akses 24/7:</strong> Menyediakan platform pemesanan tanpa batasan waktu operasional<br><strong>T2 Efisiensi:</strong> Meningkatkan efisiensi layanan pelanggan & manajemen pesanan<br><strong>T3 Transparansi:</strong> Memberikan transparansi harga & status real-time<br><strong>T4 Manajemen:</strong> Memudahkan admin mengelola inventory & laporan penjualan</p>
+                </div>
+            </div>
+
+            <!-- 2. ANALISIS KEBUTUHAN -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">2️⃣ Analisis Kebutuhan Sistem</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="lrs-card">
+                    <h4>👤 Kebutuhan User / Pelanggan</h4>
+                    <p>• Registrasi akun & autentikasi aman<br>• Browse katalog & filter kategori<br>• Cari produk berdasarkan nama & harga<br>• Kelola keranjang (add, edit qty, remove)<br>• Checkout & input data pengiriman<br>• Pilih metode kirim (COD/Ambil) & bayar<br>• Tracking pesanan real-time<br>• Download invoice & riwayat pesanan</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>🔧 Kebutuhan Admin / Staff</h4>
+                    <p>• Login dengan role-based access<br>• Dashboard analytics & grafik penjualan<br>• Kelola pesanan (view, filter, update status)<br>• Tracking & lokasi pengiriman pesanan<br>• CRUD produk (create, read, update, delete)<br>• CRUD kategori produk<br>• Manajemen data staff & role<br>• Generate & export laporan penjualan</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>💾 Kebutuhan Database</h4>
+                    <p>• 10 tabel relasional (users, orders, products, categories, carts, cart_items, order_items, order_tracks, addresses, staff)<br>• Relasi one-to-many (1:N) & one-to-one (1:1)<br>• Indexed columns untuk performa query<br>• Foreign key constraints untuk integritas<br>• Timestamp tracking (created_at, updated_at)<br>• Soft delete support untuk data integrity</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>🌐 Kebutuhan Non-Fungsional</h4>
+                    <p>• Responsif desktop, tablet, mobile<br>• Performa loading < 2 detik<br>• Support 100+ concurrent users<br>• Security: HTTPS, SQL injection prevention<br>• Data backup otomatis harian<br>• Error handling & logging system<br>• Session timeout 30 menit<br>• Availability 99.5% uptime</p>
+                </div>
+            </div>
+
+            <!-- 3. SPESIFIKASI TEKNIS -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">3️⃣ Spesifikasi Teknis & Arsitektur</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="requirement-box">
+                    <strong>🔧 Backend</strong><br>
+                    • Framework: Laravel 10<br>
+                    • Language: PHP 8.2<br>
+                    • Template: Blade Engine<br>
+                    • Auth: Laravel Breeze<br>
+                    • CORS: Enabled
+                </div>
+                <div class="requirement-box">
+                    <strong>🎨 Frontend</strong><br>
+                    • CSS: Tailwind CSS 3<br>
+                    • JS: Alpine.js (interaktif)<br>
+                    • Icons: Emoji + SVG<br>
+                    • Design: Responsive Grid<br>
+                    • Mobile First Approach
+                </div>
+                <div class="requirement-box">
+                    <strong>📊 Database</strong><br>
+                    • DBMS: MySQL 8.0<br>
+                    • Charset: utf8mb4<br>
+                    • Tables: 10 relasional<br>
+                    • Indexes: Pada PK & FK<br>
+                    • Backup: Daily scheduled
+                </div>
+                <div class="requirement-box">
+                    <strong>📦 Tools & Library</strong><br>
+                    • PDF: Barryvdh PDF<br>
+                    • Storage: Laravel Storage<br>
+                    • Payment: QRIS & COD<br>
+                    • Validation: Laravel Rules<br>
+                    • Testing: PHPUnit
+                </div>
+            </div>
+
+            <!-- 4. REQUIREMENT FUNGSIONAL -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">4️⃣ Requirement Fungsional (FR)</h3>
+            <div class="space-y-3 mb-8">
+                <div class="requirement-box">
+                    <strong>🔐 FR1: Sistem Autentikasi & Otorisasi</strong><br>
+                    User registrasi dengan email unik & password terenkripsi. Login menggunakan email/password dengan session management. Admin punya akses khusus via flag is_admin di tabel users. Role-based access control membatasi fitur admin.
+                </div>
+                <div class="requirement-box">
+                    <strong>🛍️ FR2: Manajemen Katalog Produk</strong><br>
+                    Menampilkan produk dalam grid responsif dengan thumbnail, nama, harga, stock. Filter kategori, pencarian text, sorting harga. Setiap produk punya deskripsi detail, flag is_service (jasa/barang), status stock (tersedia/habis).
+                </div>
+                <div class="requirement-box">
+                    <strong>🛒 FR3: Sistem Keranjang & Checkout</strong><br>
+                    User add/edit qty/remove item di keranjang. Checkout minta input nama, no WA, alamat kirim. Pilih metode kirim (Ambil Gratis / Kirim dengan ongkos). Hitung ongkir berdasarkan kota tujuan. Simpan di tabel carts & cart_items.
+                </div>
+                <div class="requirement-box">
+                    <strong>💳 FR4: Sistem Pembayaran & Pesanan</strong><br>
+                    Pilih metode bayar: COD (bayar saat ambil) atau QRIS (scan QR, upload bukti). Sistem membuat order record dengan status 'pending'. Admin verifikasi pembayaran & ubah status ke 'diproses'. Input tracking info (lokasi, status) ke tabel order_tracks.
+                </div>
+                <div class="requirement-box">
+                    <strong>📍 FR5: Tracking & Notifikasi Pesanan</strong><br>
+                    User lihat status pesanan real-time (pending → diproses → selesai). Tracking tampilkan lokasi & update terbaru dari order_tracks. Download invoice PDF dengan detail pesanan & total bayar. Riwayat pesanan dapat diakses kapan saja.
+                </div>
+            </div>
+
+            <!-- 5. FITUR SISTEM -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">5️⃣ Fitur-Fitur Sistem (24 Fitur Total)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="lrs-card">
+                    <h4>👤 Fitur User (8 fitur)</h4>
+                    <p>✓ Registrasi & Login<br>✓ Browse Katalog<br>✓ Filter & Cari Produk<br>✓ Kelola Keranjang<br>✓ Checkout<br>✓ Lacak Pesanan<br>✓ Download Invoice<br>✓ Kelola Alamat Kirim</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>🔧 Fitur Admin (8 fitur)</h4>
+                    <p>✓ Login & Role Access<br>✓ Dashboard Analytics<br>✓ Kelola Pesanan<br>✓ Update Status<br>✓ Input Tracking Info<br>✓ CRUD Produk<br>✓ CRUD Kategori<br>✓ Manajemen Staff</p>
+                </div>
+                <div class="lrs-card">
+                    <h4>⚙️ Fitur Teknis (8 fitur)</h4>
+                    <p>✓ Real-time Status Update<br>✓ PDF Invoice Generator<br>✓ Payment Gateway Integration<br>✓ Image Upload & Storage<br>✓ Admin Dashboard UI<br>✓ Responsive Design<br>✓ Database Indexing<br>✓ Session Management</p>
+                </div>
+            </div>
+
+            <!-- 6. DATA & RELASI ERD -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">6️⃣ Entity Relationship & Data Dictionary</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="requirement-box">
+                    <strong>📊 Diagram Relasi (Crow's Foot)</strong><br><br>
+                    <strong>Entitas Utama:</strong><br>
+                    users (1) ← → (N) orders<br>
+                    users (1) ← → (1) carts<br>
+                    users (1) ← → (N) addresses<br>
+                    users (1) ← → (1) staff<br><br>
+                    <strong>Entitas Produk:</strong><br>
+                    categories (1) ← → (N) products<br>
+                    products (1) ← → (N) cart_items<br>
+                    products (1) ← → (N) order_items<br><br>
+                    <strong>Entitas Pesanan:</strong><br>
+                    orders (1) ← → (N) order_items<br>
+                    orders (1) ← → (N) order_tracks<br>
+                    carts (1) ← → (N) cart_items
+                </div>
+                <div class="requirement-box">
+                    <strong>📚 Kolom-Kolom Penting</strong><br><br>
+                    <strong>users:</strong> id (PK), email (UNQ), is_admin (BOOL), password, phone, photo_path<br><br>
+                    <strong>products:</strong> id (PK), category_id (FK), name, price (DECIMAL), stock (INT), is_service (BOOL)<br><br>
+                    <strong>orders:</strong> id (PK), user_id (FK), status (ENUM), payment_method, payment_status, total<br><br>
+                    <strong>order_items:</strong> id (PK), order_id (FK), product_id (FK), qty (INT), price (DECIMAL)<br><br>
+                    <strong>order_tracks:</strong> id (PK), order_id (FK), status, location, note (TEXT)
+                </div>
+            </div>
+
+            <!-- 7. TIMELINE IMPLEMENTASI -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">7️⃣ Timeline Implementasi (Total 8-12 Minggu)</h3>
+            <div class="space-y-3 mb-8">
+                <div class="timeline">
+                    <strong class="text-indigo-700">📅 Fase 1: Planning & Design (1-2 Minggu)</strong><br>
+                    <span class="text-gray-600">Database schema design & normalisasi • Wireframe UI user & admin • Spesifikasi teknis detail • Setup development environment</span>
+                </div>
+                <div class="timeline">
+                    <strong class="text-indigo-700">📅 Fase 2: Backend Development (2-3 Minggu)</strong><br>
+                    <span class="text-gray-600">Create models & migrations 10 tabel • Implement authentication & authorization • Build controllers untuk CRUD • Setup API routes & validation • Database indexing</span>
+                </div>
+                <div class="timeline">
+                    <strong class="text-indigo-700">📅 Fase 3: Frontend Development (2-3 Minggu)</strong><br>
+                    <span class="text-gray-600">Build Blade templates user pages • Build Blade templates admin pages • Implement Tailwind responsive • Form validation & error handling • Alpine.js untuk interaktif elements</span>
+                </div>
+                <div class="timeline">
+                    <strong class="text-indigo-700">📅 Fase 4: Integration & Testing (1-2 Minggu)</strong><br>
+                    <span class="text-gray-600">End-to-end testing user flow • Payment gateway integration (QRIS/COD) • Bug fixing & optimization • Performance testing & load testing • Security audit</span>
+                </div>
+                <div class="timeline">
+                    <strong class="text-indigo-700">📅 Fase 5: Deployment & Go-Live (1 Minggu)</strong><br>
+                    <span class="text-gray-600">Server setup & deployment production • Database backup & disaster recovery • SSL certificate & security hardening • Monitoring & logging setup • User training & documentation</span>
+                </div>
+            </div>
+
+            <!-- 8. RESOURCE & INFRASTRUCTURE -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">8️⃣ Resource & Infrastructure</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="requirement-box">
+                    <strong>🖥️ Development Environment</strong><br>
+                    • Laragon / Docker (local dev)<br>
+                    • Code Editor: VS Code<br>
+                    • Version Control: Git & GitHub<br>
+                    • Database: MySQL Workbench<br>
+                    • API Testing: Postman
+                </div>
+                <div class="requirement-box">
+                    <strong>☁️ Production Environment</strong><br>
+                    • Web Server: Nginx/Apache<br>
+                    • App Server: PHP-FPM<br>
+                    • Database: MySQL 8.0<br>
+                    • Storage: Cloud storage (S3)<br>
+                    • CDN: CloudFlare / Bunny CDN
+                </div>
+                <div class="requirement-box">
+                    <strong>👥 Tim Development</strong><br>
+                    • 1 Backend Developer (PHP/Laravel)<br>
+                    • 1 Frontend Developer (HTML/CSS/JS)<br>
+                    • 1 Database Admin<br>
+                    • 1 QA/Tester<br>
+                    • 1 Project Manager
+                </div>
+                <div class="requirement-box">
+                    <strong>📊 Budget & Estimasi</strong><br>
+                    • Development: ~$3000-5000<br>
+                    • Server hosting: ~$50-100/month<br>
+                    • Domain: ~$10-20/year<br>
+                    • SSL: Free (Let's Encrypt)<br>
+                    • Maintenance: ~$500/month
+                </div>
+            </div>
+
+            <!-- 9. RISIKO & MITIGASI -->
+            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8 pt-4 border-t-2 border-indigo-200">9️⃣ Analisis Risiko & Mitigasi</h3>
+            <div class="space-y-2 mb-8">
+                <div class="requirement-box">
+                    <strong>⚠️ Risiko 1: Delay Development</strong> • <em>Mitigasi:</em> Agile methodology, sprint planning, backup developer, clear deadline
+                </div>
+                <div class="requirement-box">
+                    <strong>⚠️ Risiko 2: Data Loss</strong> • <em>Mitigasi:</em> Daily automated backup, redundant storage, disaster recovery plan
+                </div>
+                <div class="requirement-box">
+                    <strong>⚠️ Risiko 3: Security Breach</strong> • <em>Mitigasi:</em> HTTPS, input validation, SQL injection prevention, security audit
+                </div>
+                <div class="requirement-box">
+                    <strong>⚠️ Risiko 4: Performance Issue</strong> • <em>Mitigasi:</em> Database indexing, caching, load balancing, CDN usage
+                </div>
+            </div>
+
+            <!-- KESIMPULAN -->
+            <div class="lrs-card bg-gradient-to-r from-indigo-50 to-purple-50 border-l-4 border-indigo-500">
+                <h4>✨ Kesimpulan & Next Steps</h4>
+                <p>Fotokopiku adalah sistem e-commerce yang komprehensif dengan 10 tabel database, 5 requirement fungsional, 24 fitur sistem, dan timeline implementasi 8-12 minggu. Sistem dirancang dengan standar ISO 5807 untuk flowchart, Crow's Foot notation untuk ERD, dan struktur LRS resmi yang lengkap. Implementasi menggunakan teknologi modern (Laravel, MySQL, Tailwind) dengan fokus pada security, performance, dan user experience. <strong>Status: READY FOR DEVELOPMENT</strong></p>
+            </div>
+        </div>
+    </section>
 
             <!-- DESKRIPSI SISTEM -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
