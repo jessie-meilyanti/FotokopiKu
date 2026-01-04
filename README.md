@@ -8,157 +8,21 @@
 
 **Lihat dokumentasi lengkap (Flowchart, ERD, LRS):**
 
-### 🌐 Cara 1: Online via GitHub Pages ⭐ RECOMMENDED
-```
-https://jessie-meilyanti.github.io/FotokopiKu/dokumentasi.html
-```
-
-**Setup GitHub Pages (HANYA SEKALI):**
-1. Buka: https://github.com/jessie-meilyanti/FotokopiKu
-2. Klik **Settings** (tab paling kanan)
-3. Scroll ke bawah, klik **Pages** (menu sebelah kiri)
-4. Di **Source**, pilih: **Deploy from a branch**
-5. Di **Branch**, pilih: **master** → folder: **/docs** → **Save**
-6. Tunggu 1-2 menit, refresh halaman
-7. Akan muncul link: `https://jessie-meilyanti.github.io/FotokopiKu/`
-8. Akses dokumentasi: tambahkan `/dokumentasi.html` di akhir URL
-
-### 🔗 Cara 2: Buka di Browser Langsung
+### 🌐 Cara 1: Buka di Browser Langsung
 1. Buka folder `docs/` di project ini
-2. Klik kanan file `dokumentasi.html`
+2. Klik kanan file `flowchart-erd-lrs.html`
 3. Pilih **"Open with"** → **Chrome/Firefox/Edge**
 
-### 🖥️ Cara 3: Via URL Lokal (Jika Server Running)
+### 🔗 Cara 2: Via URL Lokal (Jika Server Running)
 ```
-http://localhost/fotokopi1/docs/dokumentasi.html
-```
+http://localhost/fotokopi1/docs/flowchart-erd-lrs.html```
+Atau sesuaikan dengan port Laragon/XAMPP kamu.
 
 **📄 Isi Dokumentasi:**
 - ✅ Flowchart User (alur pelanggan)
 - ✅ Flowchart Admin (alur manajemen)
 - ✅ ERD Database (10 tabel + relasi)
 - ✅ LRS (Layanan Rencana Sistem)
-
----
-
-## 🚀 Hosting Website (100% GRATIS)
-
-### 🎯 Opsi 1: 000webhost (Tanpa Ads, Recommended)
-
-**Langkah Setup:**
-
-1. **Daftar Akun**
-   - Buka: https://www.000webhost.com/
-   - Klik **Sign Up Free**
-   - Isi email & password
-   - Verifikasi email
-
-2. **Buat Website Baru**
-   - Klik **Create New Site**
-   - Website Name: `fotokopiku` (atau nama lain)
-   - Password: (buat password)
-   - Klik **Create**
-
-3. **Upload File Laravel**
-   - Klik **File Manager** atau **Upload Website**
-   - Hapus semua file di folder `public_html`
-   - Upload semua file **KECUALI**:
-     - ❌ `vendor/` (terlalu besar)
-     - ❌ `node_modules/` (terlalu besar)
-     - ❌ `.git/` (tidak perlu)
-     - ❌ `storage/logs/*.log` (tidak perlu)
-   - Pindahkan isi folder `public/` ke `public_html/`
-   - File lainnya taruh di `public_html/`
-
-4. **Setup Database**
-   - Klik **Database Manager** (icon database)
-   - Klik **New Database**
-   - Database Name: `fotokopi_db`
-   - Klik **Create**
-   - **CATAT**: Database name, Username, Password, Host
-
-5. **Import Database**
-   - Klik **Manage** di database yang baru dibuat
-   - Klik **phpMyAdmin**
-   - Import file SQL dari export MySQL lokal kamu
-
-6. **Update File .env**
-   - Buka File Manager → Edit file `.env`
-   - Update:
-     ```env
-     APP_URL=http://fotokopiku.000webhostapp.com
-     
-     DB_HOST=localhost (atau host yang diberikan)
-     DB_DATABASE=id12345_fotokopi_db (sesuai yang dibuat)
-     DB_USERNAME=id12345_dbuser (sesuai yang dibuat)
-     DB_PASSWORD=password_kamu
-     ```
-
-7. **Fix Path Laravel**
-   - Karena file Laravel ada di root bukan di `public/`, edit file `public_html/index.php`:
-   ```php
-   require __DIR__.'/../vendor/autoload.php';
-   $app = require_once __DIR__.'/../bootstrap/app.php';
-   ```
-
-8. **Install Composer Dependencies (Via SSH - Optional)**
-   - Jika 000webhost support SSH, login dan run:
-   ```bash
-   cd public_html
-   composer install --no-dev --optimize-autoloader
-   php artisan key:generate
-   php artisan config:cache
-   php artisan route:cache
-   ```
-
-**🎉 Website Live di:** `http://fotokopiku.000webhostapp.com`
-
----
-
-### 🎯 Opsi 2: InfinityFree (Unlimited, Ada Ads Kecil)
-
-**Sama seperti 000webhost, tapi:**
-- ✅ Storage & Bandwidth unlimited
-- ✅ Custom domain gratis (beli domain di Freenom)
-- ⚠️ Ada ads kecil di footer (bisa dihilangkan dengan CSS)
-
-**Link:** https://www.infinityfree.net/
-
----
-
-### 🎯 Opsi 3: GitHub Pages (Dokumentasi Saja)
-
-Sudah dijelaskan di bagian atas ⬆️
-
----
-
-## 📦 Cara Export Database untuk Upload
-
-**Di phpMyAdmin Lokal (Laragon):**
-1. Buka: http://localhost/phpmyadmin
-2. Pilih database `fotokopi_db`
-3. Klik tab **Export**
-4. Method: **Quick**
-5. Format: **SQL**
-6. Klik **Export** (download file .sql)
-7. File ini yang di-import ke hosting
-
----
-
-## 🔧 Troubleshooting Hosting
-
-**Error: 500 Internal Server**
-- Cek file `.env` sudah benar
-- Pastikan `storage/` folder writable (chmod 775)
-- Clear cache: `php artisan cache:clear`
-
-**Error: Database Connection**
-- Cek DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD di `.env`
-- Pastikan database sudah di-import
-
-**Error: Missing Vendor**
-- Upload folder `vendor/` via FTP (zip dulu, upload, extract di server)
-- Atau run `composer install` via SSH
 
 ---
 
