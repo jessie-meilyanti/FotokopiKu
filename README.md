@@ -1,4 +1,4 @@
-# 🖨️ FotokopiKu - Panduan Setup Proyek
+# 🖨️ FotokopiKu - Panduan Setup & Deployment
 
 > Website fotokopi online modern & responsive untuk layanan print, fotokopi, ATK, dan lebih banyak lagi! ✨
 
@@ -10,19 +10,67 @@
 
 ### 🌐 Cara 1: Buka di Browser Langsung
 1. Buka folder `docs/` di project ini
-2. Klik kanan file `flowchart-erd-lrs.html`
+2. Klik kanan file `dokumentasi.html`
 3. Pilih **"Open with"** → **Chrome/Firefox/Edge**
 
 ### 🔗 Cara 2: Via URL Lokal (Jika Server Running)
 ```
-http://localhost/fotokopi1/docs/flowchart-erd-lrs.html```
+http://localhost/fotokopi1/docs/dokumentasi.html
+```
 Atau sesuaikan dengan port Laragon/XAMPP kamu.
+
+### 🌐 Cara 3: Online via GitHub Pages
+```
+https://jessie-meilyanti.github.io/FotokopiKu/dokumentasi.html
+```
 
 **📄 Isi Dokumentasi:**
 - ✅ Flowchart User (alur pelanggan)
 - ✅ Flowchart Admin (alur manajemen)
 - ✅ ERD Database (10 tabel + relasi)
 - ✅ LRS (Layanan Rencana Sistem)
+
+---
+
+## 🚀 Deploy ke Render (Cloud Hosting Gratis)
+
+### Quick Deploy (Rekomendasi)
+1. **Persiapan:**
+   - Push semua perubahan ke GitHub: `git push origin master`
+   - Pastikan file `.env.example` sudah ada
+
+2. **Deploy ke Render:**
+   - Buka: https://render.com
+   - Sign up dengan GitHub
+   - Klik **"New +" → "Web Service"**
+   - Pilih repository **FotokopiKu**
+   - Configurasi:
+     - **Name:** fotokopiku
+     - **Environment:** Docker
+     - **Region:** Singapore (pilih yang terdekat)
+     - **Plan:** Free
+   - Klik **"Create Web Service"**
+   - Tunggu ~5-10 menit (proses build & deploy)
+   - Website live dengan URL seperti: `https://fotokopiku-xxxxx.onrender.com`
+
+3. **Setup Database di Render:**
+   - Render auto-create MySQL database (lihat di file `render.yaml`)
+   - Jalankan migration otomatis (jika diperlukan):
+     ```
+     https://fotokopiku-xxxxx.onrender.com/artisan/migrate
+     ```
+
+4. **Generate APP_KEY:**
+   - Render sudah otomatis generate via Dockerfile
+   - Atau di console Render, jalankan:
+     ```bash
+     php artisan key:generate
+     ```
+
+### File Penting untuk Deployment:
+- ✅ `Dockerfile` - Konfigurasi Docker (build otomatis)
+- ✅ `render.yaml` - Konfigurasi Render (database, env variables)
+- ✅ `.dockerignore` - File yang tidak perlu di-copy ke Docker
 
 ---
 
