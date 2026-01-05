@@ -52,13 +52,21 @@
                         <span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs">🏪 Ambil sendiri</span>
                     @endif
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <span class="text-gray-600">Penerima</span>
-                    <span class="text-gray-900 dark:text-white">{{ $order->recipient_name ?? '-' }}</span>
+                    <span class="text-gray-900 dark:text-white font-medium">{{ $order->recipient_name ?? '-' }}</span>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <span class="text-gray-600">Telepon</span>
-                    <span class="text-gray-900 dark:text-white">{{ $order->recipient_phone ?? '-' }}</span>
+                    <span class="text-gray-900 dark:text-white font-medium">
+                        @if($order->recipient_whatsapp)
+                            {{ $order->recipient_whatsapp }}
+                        @elseif($order->recipient_phone)
+                            {{ $order->recipient_phone }}
+                        @else
+                            -
+                        @endif
+                    </span>
                 </div>
                 <div class="text-sm text-gray-600 dark:text-gray-300">
                     @if($order->shipping_city)

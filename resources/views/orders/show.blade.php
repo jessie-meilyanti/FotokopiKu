@@ -41,8 +41,8 @@
                 @endif
             </div>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 space-y-3">
-                <div class="font-semibold text-gray-900 dark:text-white">Pengiriman</div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-3 sm:p-4 space-y-3">
+                <div class="font-semibold text-gray-900 dark:text-white mb-2">Pengiriman</div>
                 <div class="flex items-center justify-between text-sm">
                     <span class="text-gray-600">Metode</span>
                     @if($order->shipping_city)
@@ -51,13 +51,21 @@
                         <span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs">Ambil sendiri</span>
                     @endif
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <span class="text-gray-600">Penerima</span>
-                    <span class="text-gray-900 dark:text-white">{{ $order->recipient_name ?? '-' }}</span>
+                    <span class="text-gray-900 dark:text-white font-medium">{{ $order->recipient_name ?? '-' }}</span>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <span class="text-gray-600">Telepon</span>
-                    <span class="text-gray-900 dark:text-white">{{ $order->recipient_phone ?? '-' }}</span>
+                    <span class="text-gray-900 dark:text-white font-medium">
+                        @if($order->recipient_whatsapp)
+                            {{ $order->recipient_whatsapp }}
+                        @elseif($order->recipient_phone)
+                            {{ $order->recipient_phone }}
+                        @else
+                            -
+                        @endif
+                    </span>
                 </div>
                 <div class="text-sm text-gray-600 dark:text-gray-300">
                     @if($order->shipping_city)

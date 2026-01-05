@@ -13,6 +13,7 @@ class Order extends Model
         'user_id',
         'recipient_name',
         'recipient_phone',
+        'recipient_whatsapp',
         'shipping_address',
         'shipping_city',
         'status',

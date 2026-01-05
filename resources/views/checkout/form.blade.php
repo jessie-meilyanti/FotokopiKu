@@ -6,9 +6,12 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-6" x-data="checkoutForm()" x-init="calculateTotal()">
-            <div class="md:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-4">
-                <h2 class="font-semibold text-gray-900 dark:text-white">Detail Pengiriman & Pembayaran</h2>
-                <form action="{{ route('checkout.process') }}" method="POST" enctype="multipart/form-data" class="space-y-4" @submit="validateForm">
+            <div class="md:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-4 shadow-sm">
+                <h2 class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <span class="text-xl">📝</span> 
+                    <span>Detail Pengiriman & Pembayaran</span>
+                </h2>
+                <form action="{{ route('checkout.process') }}" method="POST" enctype="multipart/form-data" class="space-y-4" @submit.prevent.once="validateAndSubmit">
                     @csrf
                     <div>
                         <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
@@ -45,7 +48,7 @@
                         <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
                             🏙️ Kota Tujuan <span class="text-red-500 text-sm">*</span>
                         </label>
-                        <select name="city" x-model="city" @change="calculateTotal" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900 transition focus:ring-2 focus:ring-indigo-200" required>
+                        <select name="city" x-model="city" @change="calculateTotal" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900 transition focus:ring-2 focus:ring-indigo-200" :required="deliveryMethod === 'kirim-antar'">
                             <option value="">Pilih kota</option>
                             <option value="bekasi">Bekasi (Rp 12.000)</option>
                             <option value="jakarta">Jakarta (Rp 15.000)</option>
@@ -61,7 +64,7 @@
                         <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
                             📍 Alamat lengkap <span class="text-red-500 text-sm">*</span>
                         </label>
-                        <textarea name="address" rows="3" placeholder="Jalan, RT/RW, Kelurahan, Kota" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900 transition focus:ring-2 focus:ring-indigo-200" required>{{ old('address') }}</textarea>
+                        <textarea name="address" rows="3" placeholder="Jalan, RT/RW, Kelurahan, Kota" class="w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900 transition focus:ring-2 focus:ring-indigo-200" :required="deliveryMethod === 'kirim-antar'">{{ old('address') }}</textarea>
                     </div>
 
                     <div>
@@ -90,25 +93,28 @@
                             <label class="text-sm text-gray-600 dark:text-gray-300 block mb-1">
                                 Upload Bukti Transfer <span class="text-red-500 text-sm">*</span>
                             </label>
-                            <input type="file" name="payment_proof" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required>
+                            <input type="file" name="payment_proof" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" :required="paymentMethod === 'QRIS'">
                             <p class="text-xs text-gray-500 mt-1">Admin akan validasi pembayaran Anda</p>
                         </div>
                     </div>
 
                     <div class="pt-2">
-                        <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isSubmitting">
-                            <svg x-show="isSubmitting" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-lg font-semibold text-sm text-white uppercase tracking-wide transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]" :disabled="isSubmitting">
+                            <svg x-show="isSubmitting" class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            <span x-text="isSubmitting ? 'Memproses...' : 'Buat Pesanan'">Buat Pesanan</span>
+                            <span x-text="isSubmitting ? 'Memproses Pesanan...' : '✓ Buat Pesanan'">✓ Buat Pesanan</span>
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-3 md:h-fit md:sticky md:top-4">
-                <h2 class="font-semibold text-gray-900 dark:text-white">Ringkasan Pesanan</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100/70 dark:border-gray-700 p-4 sm:p-5 space-y-3 md:h-fit md:sticky md:top-4 shadow-sm">
+                <h2 class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <span class="text-xl">🛒</span> 
+                    <span>Ringkasan Pesanan</span>
+                </h2>
                 @php
                     $subtotal = $cart->items->sum(fn($i) => $i->qty * $i->product->price);
                     $totalQty = $cart->items->sum(fn($i) => $i->qty);
@@ -326,12 +332,52 @@
                         e.preventDefault();
                         return false;
                     }
+                    // Validate city only for kirim-antar
                     if (this.deliveryMethod === 'kirim-antar' && !this.city) {
                         e.preventDefault();
                         alert('Pilih kota tujuan terlebih dahulu');
                         return false;
                     }
+                    // Validate QRIS proof only if QRIS selected
+                    if (this.paymentMethod === 'QRIS') {
+                        const fileInput = document.querySelector('input[name="payment_proof"]');
+                        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                            e.preventDefault();
+                            alert('Upload bukti transfer QRIS terlebih dahulu');
+                            return false;
+                        }
+                    }
                     this.isSubmitting = true;
+                },
+
+                validateAndSubmit(e) {
+                    if (this.isSubmitting) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    
+                    // Validate city only for kirim-antar
+                    if (this.deliveryMethod === 'kirim-antar' && !this.city) {
+                        e.preventDefault();
+                        alert('⚠️ Pilih kota tujuan terlebih dahulu');
+                        return false;
+                    }
+                    
+                    // Validate QRIS proof only if QRIS selected
+                    if (this.paymentMethod === 'QRIS') {
+                        const fileInput = document.querySelector('input[name="payment_proof"]');
+                        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                            e.preventDefault();
+                            alert('⚠️ Upload bukti transfer QRIS terlebih dahulu');
+                            return false;
+                        }
+                    }
+                    
+                    // Set submitting state
+                    this.isSubmitting = true;
+                    
+                    // Submit form natively
+                    e.target.submit();
                 }
             };
         }
