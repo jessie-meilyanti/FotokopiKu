@@ -2,36 +2,6 @@
 
 > Website fotokopi online modern & responsive untuk layanan print, fotokopi, ATK, dan lebih banyak lagi! ✨
 
----
-
-## 📊 Dokumentasi Sistem
-
-**Lihat dokumentasi lengkap (Flowchart, ERD, LRS):**
-
-### 🌐 Cara 1: Buka di Browser Langsung
-1. Buka folder `docs/` di project ini
-2. Klik kanan file `dokumentasi.html`
-3. Pilih **"Open with"** → **Chrome/Firefox/Edge**
-
-### 🔗 Cara 2: Via URL Lokal (Jika Server Running)
-```
-http://localhost/fotokopi1/docs/dokumentasi.html
-```
-Atau sesuaikan dengan port Laragon/XAMPP kamu.
-
-### 🌐 Cara 3: Online via GitHub Pages
-```
-https://jessie-meilyanti.github.io/FotokopiKu/dokumentasi.html
-```
-
-**📄 Isi Dokumentasi:**
-- ✅ Flowchart User (alur pelanggan)
-- ✅ Flowchart Admin (alur manajemen)
-- ✅ ERD Database (10 tabel + relasi)
-- ✅ LRS (Layanan Rencana Sistem)
-
----
-
 ## 🎯 Apa Itu FotokopiKu?
 
 Platform e-commerce digital untuk layanan fotokopi dengan fitur lengkap:
@@ -281,11 +251,11 @@ APP_DEBUG=false
 ### Staff (Siap melayani cepat)
 - Jessie, Tasya, Nadela, Sulis, Eka
 
-### Pengguna Aktif (Beta Tester & Customer)
+### Pengguna/Pelanggan Aktif (Beta Tester & Customer)
 - Olivia, Eliana, Aurora, Amelia, Eleanor, Luna, Zairee, Selina, Quinlyn, Kayesha, Naura, Callysta
 - Noah, Leo, Luca, Zayn, Arka, Elio, Kael, Ezra, Ravi, Kenzo, Raka, Nara, Dio, Arya, Fino, Lio, Rafi, Druv, Lian
 
-Singkat dan jelas: tim inti memastikan operasional, sementara daftar pengguna adalah tester dan customer awal yang membantu validasi fitur dan responsivitas. 🙌
+Singkat dan jelas: tim inti memastikan operasional, sementara daftar pengguna/pelanggan adalah tester dan customer awal yang membantu validasi fitur dan responsivitas. 🙌
 
 ---
 
@@ -315,6 +285,3 @@ Website ini dirancang berdasarkan observasi langsung di toko fotokopi nyata untu
 
 ## 🙏 Terima Kasih!
 
-Semoga panduan ini membantu setup FotokopiKu di komputer lain. Happy coding! 🎉
-
-**Tips:** Selalu backup data sebelum update dependency atau migrasi!
