@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie Meilyanti – Unilever Campus Leader Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-blue {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animated background */
+        .hero-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(233,69,96,0.15) 0%, transparent 70%);
+            animation: pulse-bg 8s ease-in-out infinite;
+        }
+        @keyframes pulse-bg {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        /* Floating shapes */
+        .float-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            animation: float 12s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        /* Skill bars */
+        .skill-bar {
+            height: 6px;
+            border-radius: 999px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        .skill-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 0;
+        }
+
+        /* Section divider */
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border: 1px solid #667eea40;
+            color: #667eea;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+
+        /* Timeline */
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            flex-shrink: 0;
+            position: relative;
+            top: 5px;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 7px;
+            top: 19px;
+            bottom: -10px;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea40, transparent);
+        }
+
+        /* Nav */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        .nav-scrolled {
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Unilever brand accent */
+        .unilever-accent {
+            background: linear-gradient(135deg, #002776, #1f69c0, #00a3e0);
+        }
+        .unilever-text {
+            background: linear-gradient(135deg, #002776, #1f69c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animate on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typewriter cursor */
+        .cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Responsive nav links */
+        #nav-links { display: flex; }
+        @media (max-width: 768px) {
+            #nav-links { display: none; }
+            #nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(255,255,255,0.97); padding: 16px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav id="navbar" class="transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#hero" class="font-black text-lg text-white transition-colors duration-300 nav-brand">JM.</a>
+
+        <!-- Desktop links -->
+        <div id="nav-links" class="gap-6 text-sm font-medium text-white/80">
+            <a href="#about"      class="hover:text-white transition-colors">About</a>
+            <a href="#skills"     class="hover:text-white transition-colors">Skills</a>
+            <a href="#projects"   class="hover:text-white transition-colors">Projects</a>
+            <a href="#leadership" class="hover:text-white transition-colors">Leadership</a>
+            <a href="#why"        class="hover:text-white transition-colors">Why Unilever</a>
+            <a href="#contact"    class="hover:text-white transition-colors">Contact</a>
+        </div>
+
+        <button id="nav-toggle" class="md:hidden text-white focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- HERO SECTION -->
+<!-- ============================================================ -->
+<section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-white relative">
+
+    <!-- Floating decorative shapes -->
+    <div class="float-shape bg-blue-400 w-64 h-64" style="top:10%;left:5%;animation-delay:0s"></div>
+    <div class="float-shape bg-purple-400 w-48 h-48" style="top:60%;right:8%;animation-delay:3s"></div>
+    <div class="float-shape bg-pink-400 w-32 h-32" style="bottom:15%;left:20%;animation-delay:6s"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+        <!-- Avatar -->
+        <div class="mb-8 flex justify-center">
+            <div class="w-32 h-32 rounded-full border-4 border-white/30 overflow-hidden shadow-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center text-5xl font-black">
+                JM
+            </div>
+        </div>
+
+        <!-- Name & Role -->
+        <div class="section-tag mb-4" style="color:#a78bfa;border-color:#a78bfa40;background:rgba(167,139,250,0.1)">
+            🎓 Unilever Campus Leader Candidate
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+            Jessie<br>
+            <span style="background:linear-gradient(90deg,#a78bfa,#60a5fa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                Meilyanti
+            </span>
+        </h1>
+
+        <p id="typewriter" class="text-xl md:text-2xl text-white/80 mb-8 font-light cursor"></p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-4 justify-center mt-10">
+            <a href="#about" class="px-8 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm">
+                Discover My Story
+            </a>
+            <a href="#projects" class="px-8 py-3 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-sm">
+                View Projects
+            </a>
+        </div>
+
+        <!-- Scroll hint -->
+        <div class="mt-20 opacity-50 animate-bounce">
+            <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ABOUT SECTION -->
+<!-- ============================================================ -->
+<section id="about" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+            <!-- Left – visual card -->
+            <div class="reveal">
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-purple-600 to-blue-500 rounded-3xl p-1 shadow-2xl">
+                        <div class="bg-white rounded-3xl p-8">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-2xl font-black shadow-lg">
+                                    JM
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900 text-lg">Jessie Meilyanti</p>
+                                    <p class="text-gray-500 text-sm">Full-Stack Developer & Entrepreneur</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 text-sm">
+                                <div class="flex gap-3 items-center p-3 bg-purple-50 rounded-xl">
+                                    <span class="text-lg">🎓</span>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Informatics Engineering</p>
+                                        <p class="text-gray-500">Active University Student</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 items-center p-3 bg-blue-50 rounded-xl">
+                                    <span class="text-lg">💻</span>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Full-Stack Web Developer</p>
+                                        <p class="text-gray-500">Laravel · Tailwind CSS · Alpine.js</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 items-center p-3 bg-pink-50 rounded-xl">
+                                    <span class="text-lg">🚀</span>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Tech Entrepreneur</p>
+                                        <p class="text-gray-500">Founded FotokopiKu — real-world e-commerce</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 items-center p-3 bg-green-50 rounded-xl">
+                                    <span class="text-lg">🌏</span>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Jakarta, Indonesia</p>
+                                        <p class="text-gray-500">Passionate about impact-driven technology</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative dot grid -->
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 opacity-20" style="background-image:radial-gradient(circle,#667eea 1.5px,transparent 1.5px);background-size:16px 16px;"></div>
+                </div>
+            </div>
+
+            <!-- Right – text -->
+            <div class="reveal">
+                <div class="section-tag">✨ About Me</div>
+                <h2 class="text-4xl font-black text-gray-900 mb-6 leading-tight">
+                    Turning Real-World Problems<br>
+                    <span class="gradient-text-blue">into Digital Solutions</span>
+                </h2>
+                <div class="space-y-4 text-gray-600 leading-relaxed">
+                    <p>
+                        Hi! I'm <strong class="text-gray-900">Jessie Meilyanti</strong>, an Informatics Engineering student with a deep passion
+                        for building technology that creates <em>real, tangible impact</em> in people's everyday lives.
+                    </p>
+                    <p>
+                        I founded and built <strong class="text-gray-900">FotokopiKu</strong>, a full-featured e-commerce platform for
+                        photocopy and printing services — born from observing real pain points at a local copy shop.
+                        What started as a student project became a fully deployed platform serving customers across Jabodetabek.
+                    </p>
+                    <p>
+                        Beyond code, I believe technology is most powerful when it's paired with empathy, leadership, and
+                        the courage to act on what you observe. That's the spirit I bring to everything I do.
+                    </p>
+                </div>
+
+                <!-- Stats row -->
+                <div class="mt-8 grid grid-cols-3 gap-4">
+                    <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                        <p class="text-3xl font-black gradient-text-blue">3+</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Years Coding</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                        <p class="text-3xl font-black gradient-text-blue">10+</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Projects Built</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                        <p class="text-3xl font-black gradient-text-blue">30+</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Users Served</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SKILLS SECTION -->
+<!-- ============================================================ -->
+<section id="skills" class="py-24 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <div class="section-tag">🛠️ Skills & Expertise</div>
+            <h2 class="text-4xl font-black text-gray-900 mt-2">What I Bring to the Table</h2>
+            <p class="text-gray-500 mt-3 max-w-xl mx-auto">A versatile skill set combining technical depth with leadership capabilities.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Technical Skills -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm card-hover reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">💻</div>
+                    <h3 class="font-bold text-gray-900 text-lg">Technical Skills</h3>
+                </div>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">PHP / Laravel</span>
+                            <span class="text-xs text-gray-400">90%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Tailwind CSS</span>
+                            <span class="text-xs text-gray-400">92%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">JavaScript / Alpine.js</span>
+                            <span class="text-xs text-gray-400">80%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">MySQL / Database Design</span>
+                            <span class="text-xs text-gray-400">85%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">UI/UX Design (Figma)</span>
+                            <span class="text-xs text-gray-400">75%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Skills / Leadership -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm card-hover reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl">🌟</div>
+                    <h3 class="font-bold text-gray-900 text-lg">Leadership & Soft Skills</h3>
+                </div>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Team Leadership</span>
+                            <span class="text-xs text-gray-400">88%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Problem Solving</span>
+                            <span class="text-xs text-gray-400">93%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="93"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Communication</span>
+                            <span class="text-xs text-gray-400">85%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Entrepreneurship</span>
+                            <span class="text-xs text-gray-400">87%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-semibold text-gray-700">Project Management</span>
+                            <span class="text-xs text-gray-400">82%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech badges -->
+        <div class="mt-10 flex flex-wrap gap-3 justify-center reveal">
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🐘 PHP 8.1</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">⚡ Laravel 10</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🎨 Tailwind CSS 3</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🏔 Alpine.js</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">⚡ Vite 5</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🗃 MySQL</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🎨 Figma</span>
+            <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm">🐙 Git & GitHub</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PROJECTS SECTION -->
+<!-- ============================================================ -->
+<section id="projects" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-16 reveal">
+            <div class="section-tag">🚀 Projects</div>
+            <h2 class="text-4xl font-black text-gray-900 mt-2">Building Things That Matter</h2>
+            <p class="text-gray-500 mt-3 max-w-xl mx-auto">From idea to production — solving real problems with well-crafted technology.</p>
+        </div>
+
+        <!-- Featured Project: FotokopiKu -->
+        <div class="mb-10 reveal">
+            <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-3xl p-1 shadow-2xl">
+                <div class="bg-white rounded-3xl p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-10 items-center">
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full uppercase tracking-wider">⭐ Featured Project</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Live</span>
+                            </div>
+                            <h3 class="text-3xl font-black text-gray-900 mb-4">🖨️ FotokopiKu</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                A full-stack e-commerce platform for photocopy & printing services. Built from scratch after observing
+                                real operational pain points at a local copy shop. Deployed and actively used by 30+ customers across Jabodetabek.
+                            </p>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold mt-0.5">✓</span>
+                                    <p class="text-sm text-gray-700">Real-time shopping cart with quantity controls & live price updates</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold mt-0.5">✓</span>
+                                    <p class="text-sm text-gray-700">COD & QRIS payment with proof-of-transfer upload system</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold mt-0.5">✓</span>
+                                    <p class="text-sm text-gray-700">Automated shipping cost calculator for Jabodetabek area</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold mt-0.5">✓</span>
+                                    <p class="text-sm text-gray-700">Full admin dashboard — orders, products, stock management</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold mt-0.5">✓</span>
+                                    <p class="text-sm text-gray-700">100% responsive — mobile, tablet & desktop</p>
+                                </div>
+                            </div>
+                            <!-- Tech stack chips -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs font-semibold bg-indigo-50 text-indigo-700 rounded-full">Laravel 10</span>
+                                <span class="px-3 py-1 text-xs font-semibold bg-blue-50 text-blue-700 rounded-full">Tailwind CSS</span>
+                                <span class="px-3 py-1 text-xs font-semibold bg-green-50 text-green-700 rounded-full">Alpine.js</span>
+                                <span class="px-3 py-1 text-xs font-semibold bg-yellow-50 text-yellow-700 rounded-full">MySQL</span>
+                                <span class="px-3 py-1 text-xs font-semibold bg-purple-50 text-purple-700 rounded-full">Vite 5</span>
+                            </div>
+                        </div>
+
+                        <!-- Right: Impact metrics -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 text-center">
+                                <p class="text-4xl font-black gradient-text-blue mb-1">30+</p>
+                                <p class="text-sm text-gray-600 font-medium">Active Users</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 text-center">
+                                <p class="text-4xl font-black" style="background:linear-gradient(135deg,#ec4899,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">COD</p>
+                                <p class="text-sm text-gray-600 font-medium">+ QRIS Payment</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 text-center">
+                                <p class="text-4xl font-black" style="background:linear-gradient(135deg,#10b981,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">100%</p>
+                                <p class="text-sm text-gray-600 font-medium">Responsive</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-blue-50 to-sky-50 rounded-2xl p-6 text-center">
+                                <p class="text-4xl font-black" style="background:linear-gradient(135deg,#3b82f6,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Full</p>
+                                <p class="text-sm text-gray-600 font-medium">Stack Built</p>
+                            </div>
+
+                            <!-- Role & learning -->
+                            <div class="col-span-2 bg-gray-900 text-white rounded-2xl p-5">
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">My Role & Learning</p>
+                                <p class="text-sm leading-relaxed text-gray-300">
+                                    Solo-architected the entire system — database schema, REST API, front-end, admin panel, and deployment.
+                                    This taught me how to <strong class="text-white">observe problems, prototype fast, iterate with real users,</strong> and ship a complete product.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other projects grid -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm reveal">
+                <div class="text-3xl mb-4">🌐</div>
+                <h3 class="font-bold text-gray-900 mb-2">Company Profile Website</h3>
+                <p class="text-sm text-gray-600 mb-4">Responsive landing page for a local business with modern UI/UX design patterns.</p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">HTML/CSS</span>
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">JavaScript</span>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm reveal">
+                <div class="text-3xl mb-4">📊</div>
+                <h3 class="font-bold text-gray-900 mb-2">Student Database System</h3>
+                <p class="text-sm text-gray-600 mb-4">CRUD application with search, filter, and export features for academic data management.</p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">Laravel</span>
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">MySQL</span>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm reveal">
+                <div class="text-3xl mb-4">📱</div>
+                <h3 class="font-bold text-gray-900 mb-2">Event Management App</h3>
+                <p class="text-sm text-gray-600 mb-4">Campus event registration system with QR check-in, notification, and attendance tracking.</p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">PHP</span>
+                    <span class="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEADERSHIP / EXPERIENCE SECTION -->
+<!-- ============================================================ -->
+<section id="leadership" class="py-24 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-16 reveal">
+            <div class="section-tag">🏆 Leadership & Experience</div>
+            <h2 class="text-4xl font-black text-gray-900 mt-2">Growing Through Action</h2>
+            <p class="text-gray-500 mt-3 max-w-xl mx-auto">Every role and experience has shaped my ability to lead, collaborate, and deliver.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Timeline -->
+            <div class="space-y-6 reveal">
+                <h3 class="font-bold text-gray-900 text-lg flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-sm">📅</span>
+                    Timeline
+                </h3>
+
+                <!-- Item 1 -->
+                <div class="flex gap-4 relative">
+                    <div class="relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="pb-6">
+                        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">2024 – Present</p>
+                        <h4 class="font-bold text-gray-900">Founder & Lead Developer — FotokopiKu</h4>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            Designed, built, and deployed a full e-commerce platform from scratch. Managed a team of 5 staff members and coordinated with 30+ beta testers to iterate on features.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex gap-4 relative">
+                    <div class="relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="pb-6">
+                        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">2023 – 2024</p>
+                        <h4 class="font-bold text-gray-900">Head of Technology — Campus Organization</h4>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            Led the IT division for campus student body. Built internal tools, managed event tech infrastructure, and mentored 8 junior developers in web technologies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex gap-4 relative">
+                    <div class="relative">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="pb-6">
+                        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">2023</p>
+                        <h4 class="font-bold text-gray-900">Web Development Intern — Local Tech Startup</h4>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            Contributed to front-end feature development and learned agile workflow, code reviews, and collaborative Git practices in a professional environment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex gap-4">
+                    <div class="timeline-dot"></div>
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">2021 – 2023</p>
+                        <h4 class="font-bold text-gray-900">Informatics Student — University</h4>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            Pursued a degree in Informatics Engineering. Actively participated in tech competitions, hackathons, and leadership workshops.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="space-y-4 reveal">
+                <h3 class="font-bold text-gray-900 text-lg flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center text-sm">🏅</span>
+                    Key Achievements
+                </h3>
+
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-100 flex items-center justify-center text-xl flex-shrink-0">🥇</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">1st Place — Campus Tech Competition</h4>
+                            <p class="text-xs text-gray-500 mt-1">Built a real-time logistics tracker prototype in 24 hours during a hackathon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl flex-shrink-0">🚀</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Launched FotokopiKu in Production</h4>
+                            <p class="text-xs text-gray-500 mt-1">Sole developer who took a business idea from concept to working product with real users.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">🎤</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Speaker — Campus Tech Seminar</h4>
+                            <p class="text-xs text-gray-500 mt-1">Presented "Building Your First E-Commerce App" to 100+ students.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-xl flex-shrink-0">🌱</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Mentored Junior Developers</h4>
+                            <p class="text-xs text-gray-500 mt-1">Personally mentored 8 students in web development, 3 of whom launched their own projects.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 card-hover">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-pink-100 flex items-center justify-center text-xl flex-shrink-0">📚</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Dean's List Academic Achievement</h4>
+                            <p class="text-xs text-gray-500 mt-1">Maintained strong GPA while simultaneously managing real-world projects and extracurriculars.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- WHY UNILEVER SECTION -->
+<!-- ============================================================ -->
+<section id="why" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-16 reveal">
+            <div class="section-tag" style="color:#002776;border-color:#00277640;background:rgba(0,39,118,0.05)">💙 Why Unilever</div>
+            <h2 class="text-4xl font-black text-gray-900 mt-2">
+                Why I Want to Be a<br>
+                <span class="unilever-text">Unilever Campus Leader</span>
+            </h2>
+        </div>
+
+        <!-- Why Unilever grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 card-hover reveal">
+                <div class="text-4xl mb-4">🌍</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">Purpose-Driven Impact</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Unilever's commitment to <strong>Sustainable Living</strong> resonates deeply with how I build technology — not for technology's sake,
+                    but to make a <em>real difference</em> in people's lives. I want to amplify this mission on campus.
+                </p>
+            </div>
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 card-hover reveal">
+                <div class="text-4xl mb-4">🤝</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">Community Builder</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    As someone who already leads a team and mentors peers, I know how to build communities of trust.
+                    As a Campus Leader, I can <strong>bridge Unilever's values</strong> with the aspirations of the next generation of Indonesian talent.
+                </p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 card-hover reveal">
+                <div class="text-4xl mb-4">🚀</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">Future-Forward Thinking</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    I combine entrepreneurial instinct with technical execution. I don't just talk about innovation —
+                    I <strong>ship products</strong>, test with real users, and iterate. This agile mindset fits perfectly with Unilever's culture.
+                </p>
+            </div>
+        </div>
+
+        <!-- My Unilever Campus Leader vision -->
+        <div class="bg-gray-900 rounded-3xl p-8 md:p-12 reveal">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-3">My Vision as Campus Leader</p>
+                    <h3 class="text-3xl font-black text-white mb-4">Connecting Talent.<br>Inspiring Action.</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        I envision being a Campus Leader who doesn't just represent a brand, but genuinely <strong class="text-white">empowers peers</strong>
+                        to discover their potential. I'll organize meaningful events, share real insights from the tech and business world,
+                        and create pathways for students to connect with Unilever's opportunities.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl unilever-accent flex items-center justify-center text-white text-lg flex-shrink-0">🎯</div>
+                        <p class="text-sm text-gray-300">Committed to authentic leadership with measurable campus impact</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 bg-white/5 rounded-2xl p-4">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <p class="font-semibold text-white text-sm">Tech & Innovation Workshops</p>
+                            <p class="text-xs text-gray-400 mt-1">Host Unilever x Tech events linking sustainability challenges to digital solutions</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-2xl p-4">
+                        <span class="text-2xl">🌱</span>
+                        <div>
+                            <p class="font-semibold text-white text-sm">Sustainability Campaigns</p>
+                            <p class="text-xs text-gray-400 mt-1">Drive awareness about Unilever's Sustainable Living Plan among students</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-2xl p-4">
+                        <span class="text-2xl">🎓</span>
+                        <div>
+                            <p class="font-semibold text-white text-sm">Career Readiness Programs</p>
+                            <p class="text-xs text-gray-400 mt-1">Connect ambitious students with internship & graduate program opportunities at Unilever</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- VALUES SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-10 reveal">
+            <div class="section-tag">💎 Core Values</div>
+            <h2 class="text-3xl font-black text-gray-900 mt-2">What Drives Me</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm reveal">
+                <div class="text-4xl mb-3">🎯</div>
+                <h4 class="font-bold text-gray-900 mb-2">Purpose</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Every project I start must solve a real problem and create genuine value</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm reveal">
+                <div class="text-4xl mb-3">⚡</div>
+                <h4 class="font-bold text-gray-900 mb-2">Initiative</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">I see an opportunity, I build it. I don't wait for permission to start</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm reveal">
+                <div class="text-4xl mb-3">🤲</div>
+                <h4 class="font-bold text-gray-900 mb-2">Empathy</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Understanding people — users, teammates, customers — is the foundation of everything I build</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 text-center card-hover shadow-sm reveal">
+                <div class="text-4xl mb-3">📈</div>
+                <h4 class="font-bold text-gray-900 mb-2">Growth</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Continuous learning is non-negotiable. I grow, my team grows, the impact grows</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CONTACT SECTION -->
+<!-- ============================================================ -->
+<section id="contact" class="py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="reveal">
+            <div class="section-tag">📬 Let's Connect</div>
+            <h2 class="text-4xl font-black text-gray-900 mt-2 mb-4">Ready to Make an Impact?</h2>
+            <p class="text-gray-600 leading-relaxed mb-10 max-w-lg mx-auto">
+                Whether you're from Unilever's talent team or a fellow student looking to collaborate —
+                I'd love to connect and start a conversation.
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 mb-10">
+                <a href="mailto:jessie.meilyanti@gmail.com"
+                   class="flex flex-col items-center gap-3 p-6 bg-gray-50 hover:bg-purple-50 rounded-2xl transition-colors card-hover border border-transparent hover:border-purple-100">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-xl">📧</div>
+                    <div>
+                        <p class="font-semibold text-gray-900 text-sm">Email</p>
+                        <p class="text-xs text-gray-500">jessie.meilyanti@gmail.com</p>
+                    </div>
+                </a>
+                <a href="https://github.com/jessie-meilyanti" target="_blank" rel="noopener"
+                   class="flex flex-col items-center gap-3 p-6 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-colors card-hover border border-transparent hover:border-gray-200">
+                    <div class="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center text-xl">🐙</div>
+                    <div>
+                        <p class="font-semibold text-gray-900 text-sm">GitHub</p>
+                        <p class="text-xs text-gray-500">jessie-meilyanti</p>
+                    </div>
+                </a>
+                <a href="https://linkedin.com/in/jessie-meilyanti" target="_blank" rel="noopener"
+                   class="flex flex-col items-center gap-3 p-6 bg-gray-50 hover:bg-blue-50 rounded-2xl transition-colors card-hover border border-transparent hover:border-blue-100">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-xl">💼</div>
+                    <div>
+                        <p class="font-semibold text-gray-900 text-sm">LinkedIn</p>
+                        <p class="text-xs text-gray-500">Jessie Meilyanti</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="unilever-accent rounded-3xl p-8 text-white">
+                <h3 class="text-2xl font-black mb-2">Let's Build Something Meaningful Together</h3>
+                <p class="text-white/80 text-sm mb-6">I'm ready to represent Unilever's values, inspire my peers, and create lasting impact on campus.</p>
+                <a href="mailto:jessie.meilyanti@gmail.com"
+                   class="inline-block px-8 py-3 bg-white text-blue-900 font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg text-sm">
+                    Get In Touch →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-gray-900 text-white py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-400 text-sm">© 2026 Jessie Meilyanti. Built with ❤️ and lots of ☕</p>
+        <div class="flex gap-6 text-sm text-gray-400">
+            <a href="#about" class="hover:text-white transition-colors">About</a>
+            <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+            <a href="#why" class="hover:text-white transition-colors">Why Unilever</a>
+            <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+    // --- Typewriter ---
+    const phrases = [
+        "Full-Stack Developer 💻",
+        "Entrepreneur 🚀",
+        "Problem Solver 🎯",
+        "Unilever Campus Leader Candidate 💙",
+    ];
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+    const el = document.getElementById('typewriter');
+    function type() {
+        const phrase = phrases[phraseIdx];
+        if (!deleting) {
+            el.textContent = phrase.slice(0, ++charIdx);
+            if (charIdx === phrase.length) { deleting = true; return setTimeout(type, 1800); }
+        } else {
+            el.textContent = phrase.slice(0, --charIdx);
+            if (charIdx === 0) { deleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; }
+        }
+        setTimeout(type, deleting ? 50 : 80);
+    }
+    type();
+
+    // --- Navbar scroll effect ---
+    const navbar = document.getElementById('navbar');
+    const brand = navbar.querySelector('.nav-brand');
+    const navLinks = navbar.querySelectorAll('#nav-links a');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+            navbar.classList.add('nav-scrolled');
+            brand.style.color = '#1f2937';
+            navLinks.forEach(a => { a.style.color = '#374151'; a.onmouseover = () => a.style.color = '#6366f1'; a.onmouseout = () => a.style.color = '#374151'; });
+        } else {
+            navbar.classList.remove('nav-scrolled');
+            brand.style.color = 'white';
+            navLinks.forEach(a => { a.style.color = 'rgba(255,255,255,0.8)'; a.onmouseover = () => a.style.color = 'white'; a.onmouseout = () => a.style.color = 'rgba(255,255,255,0.8)'; });
+        }
+    });
+
+    // --- Mobile nav toggle ---
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+        document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    // --- Reveal on scroll ---
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+
+    // --- Skill bar animation ---
+    const skillBars = document.querySelectorAll('.skill-fill');
+    const skillObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.style.width = e.target.dataset.width + '%';
+                skillObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    skillBars.forEach(b => skillObs.observe(b));
+</script>
+</body>
+</html>
